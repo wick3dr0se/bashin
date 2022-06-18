@@ -128,7 +128,8 @@ INCREMENT() { # increment by specification
 }
 
 RAINBOW() { # output characters in a rainbow pattern
-	i=1
+	local i n
+        i=1
 	while read -N1 n ; do
 		[[ $i -le 6 ]] && ((i++))
 		[[ $i == 7 ]] && i=1
