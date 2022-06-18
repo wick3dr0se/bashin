@@ -21,10 +21,11 @@ arr1=('im unique' '9313' 'im not unique')
 arr2=('im not unique' 'x')
 UNIQUE_ELEMENT "${arr1[@]}" "${arr2[@]}"
 
-INCREMENT 10-100+5
+INCREMENT 5-25+5
+
+DECREMENT 0-50-10
 
 RAINBOW "I use Arch btw"
 
 echo 'this line gets deleted from ANSI'
 ANSI up del_cursor
-

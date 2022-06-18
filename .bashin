@@ -2,7 +2,7 @@
 # see usage in test.sh
 
 4BIT() { # ANSI escape color codes
-	local bg_clr fg_clr fx
+	local bg_clr fg_clr fx col
 	declare -A bg_clr fg_clr fx
 bg_clr=(
 [black]=40	[bright_black]=100
@@ -36,18 +36,18 @@ fx=(
 [strikeout]=9
 )
 
-	for i in ${!fg_clr[@]} ${!bg_clr[@]} ${!fx[@]} ; do
-		case $i in
-			$2) fg_clr="${fg_clr[$i]}" ;;
-			$3) [[ $4 ]] && bg_clr="${bg_clr[$i]};" || fx="${fx[$i]};" ;;
-			$4) fx="${fx[$i]};" ;;
+	for col in ${!fg_clr[@]} ${!bg_clr[@]} ${!fx[@]} ; do
+		case $col in
+			$2) fg_clr="${fg_clr[$col]}" ;;
+			$3) [[ $4 ]] && bg_clr="${bg_clr[$col]};" || fx="${fx[$col]};" ;;
+			$4) fx="${fx[$col]};" ;;
 		esac
 	done
 	printf '\e[%s%s%sm%s\e[0m\n' "$fx" "$bg_clr" "$fg_clr" "$1"
 }
 
 ANSI() {
-	local cursor val val2 erase
+	local cursor val val2 erase col
 	
 	IFS=- read x val val2 <<<$1
 
@@ -77,63 +77,80 @@ erase=(
 [del_line-clear]='\e[2K'
 )
 	
-	for i in "${!cursor[@]}" "${!erase[@]}" ; do
-		case $i in
-			${1/-*}) cursor="${cursor[$i]}" ;;
-			$2) erase="${erase[$i]}" ;;
+	for col in "${!cursor[@]}" "${!erase[@]}" ; do
+		case $col in
+			${1/-*}) cursor="${cursor[$col]}" ;;
+			$2) erase="${erase[$col]}" ;;
 		esac
 	done
 	
-	printf "$cursor$erase"
+	printf "${cursor}${erase}"
 }
 
 ABSOLUTE_PATH() { # absolute path to script
 	local var
+	
 	[[ $1 ]] && var="/${1}" || var=
 	[[ ${0%/*} == ${0##*/} ]] && echo "$var" || echo "${0%/*}${var}"
 }
 
 RANDOM_ELEMENT() { # random element from array
 	local var
+	
 	var=($@)
 	echo "${var[RANDOM%${#var[@]}]}"
 }
 
 UNIQUE_ELEMENT() { # get unique elements from specified arrays
-	local i
-	for i in "${arr1[@]}" ; do	
-		var1+=$i-
+	local col
+	
+	for col in "${arr1[@]}" ; do	
+		var1+=$col-
 	done
 
-	for i in "${arr2[@]}" ; do
-		var2+=$i-
+	for col in "${arr2[@]}" ; do
+		var2+=$col-
 	done
 
-	for i in "${arr1[@]}" "${arr2[@]}" ; do
-		[[ $var1 =~ $i- ]] || printf '%s ' "$i"
-		[[ $var2 =~ $i- ]] || printf '%s ' "$i"
+	for col in "${arr1[@]}" "${arr2[@]}" ; do
+		[[ $var1 =~ $col- ]] || printf '%s ' "$col"
+		[[ $var2 =~ $col- ]] || printf '%s ' "$col"
 	done
 	echo
 }
 
 INCREMENT() { # increment by specification
-	local n e i
-	IFS='-+' read n e i <<<$1
+	local init end increment
+	
+	IFS='-+' read init end icrement <<<$1
 
-	until [[ $n -ge $e ]] ; do
-		((n+=$i))
-		printf '%s ' "$n"
+	until [[ $init -ge $end ]] ; do
+		((init+=$icrement))
+		printf '%s ' "$init"
+	done
+	echo
+}
+
+DECREMENT() {
+	local init end decrement
+	
+	IFS='-' read init end decrement <<<$1
+
+	until [[ $init -le -$end ]] ; do
+		init=$((init-$decrement))
+		printf '%s ' "$init"
 	done
 	echo
 }
 
 RAINBOW() { # output characters in a rainbow pattern
-	local i n
-        i=1
-	while read -N1 n ; do
-		[[ $i -le 6 ]] && ((i++))
-		[[ $i == 7 ]] && i=1
-		[[ $n == ' ' ]] && i=$((i-1))
-		printf '\e[1;3%sm%s\e[0m' "$i" "$n"
+	local clr char
+        
+	clr=1
+	while read -N1 char ; do
+		[[ $clr -le 6 ]] && ((clr++))
+		[[ $clr == 7 ]] && clr=1
+		[[ $char == ' ' ]] && ((clr--))
+		printf '\e[1;3%sm%s\e[0m' "$clr" "$char"
 	done <<<$@
 }
