@@ -1,6 +1,8 @@
 #!/bin/bash
 # see usage in test.sh
+
 set -a
+#shopt -s expand_aliases
 
 4BIT() { # ANSI escape color codes
 	local bg_clr fg_clr fx col
@@ -104,19 +106,19 @@ RANDOM_ELEMENT() { # random element from array
 }
 
 UNIQUE_ELEMENT() { # get unique elements from specified arrays
-	local col
+	local col var1 var2
 	
 	for col in "${arr1[@]}" ; do	
-		var1+=$col-
+		var1+="^${col}$"
 	done
 
 	for col in "${arr2[@]}" ; do
-		var2+=$col-
+		var2+="^${col}$"
 	done
 
 	for col in "${arr1[@]}" "${arr2[@]}" ; do
-		[[ $var1 =~ $col- ]] || printf '%s ' "$col"
-		[[ $var2 =~ $col- ]] || printf '%s ' "$col"
+		[[ $var1 =~ "^${col}$" ]] || printf '%s ' "$col"
+		[[ $var2 =~ "^${col}$" ]] || printf '%s ' "$col"
 	done
 	echo
 }
