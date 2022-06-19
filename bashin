@@ -1,0 +1,14 @@
+#!/bin/bash
+# see usage in test.sh
+
+set -a
+
+ABSOLUTE_PATH() {
+	local var
+	[[ $1 ]] && var="/${1}" || var=
+	[[ $0 == bashin ]] && echo "${var#/}" || echo "${BASH_SOURCE%/*}${var}"
+}
+
+. $(ABSOLUTE_PATH 'ansi.sh')
+. $(ABSOLUTE_PATH 'arithmetic.sh')
+. $(ABSOLUTE_PATH 'string-manipulation.sh')
