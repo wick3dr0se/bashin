@@ -3,10 +3,10 @@
 INCREMENT() {
 	local init end increment
 	
-	IFS='=+' read init end icrement <<<$1
+	IFS='=+' read init increment end <<<$@
 
 	until [[ $init -ge $end ]] ; do
-		((init+=$icrement))
+		((init+=$increment))
 		printf '%s ' "$init"
 	done
 	echo
@@ -15,7 +15,7 @@ INCREMENT() {
 DECREMENT() {
 	local init end decrement
 	
-	IFS='=-' read init end decrement <<<$1
+	IFS='=-' read init decrement end <<<$@
 
 	until [[ $init -le -$end ]] ; do
 		init=$((init-$decrement))
@@ -27,17 +27,17 @@ DECREMENT() {
 DIVIDE() {
 	local numerator denominator
 
-	IFS='/' read numerator denominator <<<$1
+	IFS='/' read numerator denominator <<<$@
 	numerator=${numerator//.[0-9]*}
 	denominator=${denominator//.[0-9]*}
 
 	echo $((numerator/denominator))
 }
 
-MODULUS() {
+MODULO() {
 	local numerator denominator
 
-	IFS='%' read numerator denominator <<<$1
+	IFS='%' read numerator denominator <<<$@
 	numerator=${numerator//.[0-9]*}
 	denominator=${denominator//.[0-9]*}
 
@@ -47,7 +47,7 @@ MODULUS() {
 MULTIPLY() {
 	local x y
 
-	IFS='*' read x y <<<$1
+	IFS='*x' read x y <<<$@
 
 	echo $((x*y))
 }
@@ -55,7 +55,7 @@ MULTIPLY() {
 ADD() {
 	local x y
 	
-	IFS='+' read x y <<<$1
+	IFS='+' read x y <<<$@
 
 	echo $((x+y))
 }
@@ -63,7 +63,7 @@ ADD() {
 SUBTRACT() {
 	local x y
 
-	IFS='-' read x y <<<$1
+	IFS='-' read x y <<<$@
 	
 	echo $((x-y))
 }
