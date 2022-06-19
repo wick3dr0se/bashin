@@ -33,9 +33,11 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
     * [String Manipulation](#string-manipulation)
         * [RANDOM_ELEMENT](#random_element)
         * [UNIQUE_ELEMENT](#unique_element)
+    * [Miscellaneous](#miscellaneous)
 * [Communication](#communication)
 
-<div align="center"><h1>Setup</h1></div>
+# Setup
+
 clone the repository
 
 `git clone https://github.com/wick3dr0se/bashin && cd bashin/`
@@ -50,13 +52,9 @@ source bashin
 
 *append to your .bashrc to use interactively & globally*
 
-<div align="center"><h1>How to Use</h1></div>
+# How to Use
 
-### [ABSOLUTE_PATH]
-
-> `ABSOLUTE_PATH '<script_name>'`
-
-## ANSI
+<div align="center"><h2>ANSI</h2></div>
 
 ### ANSI [4BIT]
 
@@ -127,7 +125,7 @@ or
 
 > `RAINBOW '<string>'`
 
-## Arithmetic
+<div align="center"><h2>Arithmetic</h2></div>
 
 ### [INCREMENT]
 
@@ -171,15 +169,24 @@ or
 
 ---
 
-## String Manipulation
+<div align="center"><h2>String Manipulation</h2></div>
 
 ### [RANDOM_ELEMENT]
+
 > `RANDOM_ELEMENT  "<array[@]>"`
 
 ---
 
 ### [UNIQUE_ELEMENT]
+
 > `UNIQUE_ELEMENT "<array1[@]>" "<array2[@]>"`
 
-<div align="center"><h1>Communication</h1></div>
+<div align="center"><h2>Miscellaneous</h2></div>
+
+### [ABSOLUTE_PATH]
+
+> `ABSOLUTE_PATH '<script_name>'`
+
+# Communication
+
 [discord](https://discord.gg/TstuWvDzXr)
