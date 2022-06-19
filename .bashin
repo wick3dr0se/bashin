@@ -45,6 +45,7 @@ fx=(
 	done
 	printf '\e[%s%s%sm%s\e[0m\n' "$fx" "$bg_clr" "$fg_clr" "$1"
 }
+export -f 4BIT
 
 ANSI() {
 	local cursor val val2 erase col
@@ -86,6 +87,7 @@ erase=(
 	
 	printf "${cursor}${erase}"
 }
+export -f ANSI
 
 ABSOLUTE_PATH() { # absolute path to script
 	local var
@@ -93,6 +95,7 @@ ABSOLUTE_PATH() { # absolute path to script
 	[[ $1 ]] && var="/${1}" || var=
 	[[ ${0%/*} == ${0##*/} ]] && echo "$var" || echo "${0%/*}${var}"
 }
+export -f ABSOLUTE_PATH
 
 RANDOM_ELEMENT() { # random element from array
 	local var
@@ -100,6 +103,7 @@ RANDOM_ELEMENT() { # random element from array
 	var=($@)
 	echo "${var[RANDOM%${#var[@]}]}"
 }
+export -f RANDOM_ELEMENT
 
 UNIQUE_ELEMENT() { # get unique elements from specified arrays
 	local col
@@ -118,11 +122,12 @@ UNIQUE_ELEMENT() { # get unique elements from specified arrays
 	done
 	echo
 }
+export -f UNIQUE_ELEMENT
 
 INCREMENT() { # increment by specification
 	local init end increment
 	
-	IFS='-+' read init end icrement <<<$1
+	IFS='=+' read init end icrement <<<$1
 
 	until [[ $init -ge $end ]] ; do
 		((init+=$icrement))
@@ -130,11 +135,12 @@ INCREMENT() { # increment by specification
 	done
 	echo
 }
+export -f INCREMENT
 
 DECREMENT() {
 	local init end decrement
 	
-	IFS='-' read init end decrement <<<$1
+	IFS='=-' read init end decrement <<<$1
 
 	until [[ $init -le -$end ]] ; do
 		init=$((init-$decrement))
@@ -142,6 +148,7 @@ DECREMENT() {
 	done
 	echo
 }
+export -f DECREMENT
 
 RAINBOW() { # output characters in a rainbow pattern
 	local clr char
@@ -154,3 +161,4 @@ RAINBOW() { # output characters in a rainbow pattern
 		printf '\e[1;3%sm%s\e[0m' "$clr" "$char"
 	done <<<$@
 }
+export -f RAINBOW
