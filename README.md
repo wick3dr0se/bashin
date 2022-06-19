@@ -75,6 +75,8 @@ or
 `light-blue` - set fg/bg color to light blue  
 `white` - set fg/bg color to white
 
+---
+
 ### [4BIT]-style params:
 
 `bold` - set bold style  
@@ -109,6 +111,8 @@ or
 `save` - save cursor position  
 `restore` - restore cursor to the last save position
 
+---
+
 ### [VT100]-erase params:
 
 `cursor` - erase from cursor to end of screen  
@@ -124,6 +128,8 @@ or
 ### ANSI [RAINBOW]
 
 > `RAINBOW '<string>'`
+
+---
 
 <div align="center"><h2>Arithmetic</h2></div>
 
@@ -181,11 +187,15 @@ or
 
 > `UNIQUE_ELEMENT "<array1[@]>" "<array2[@]>"`
 
+---
+
 <div align="center"><h2>Miscellaneous</h2></div>
 
 ### [ABSOLUTE_PATH]
 
 > `ABSOLUTE_PATH '<script_name>'`
+
+---
 
 # Communication
 
