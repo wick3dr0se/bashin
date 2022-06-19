@@ -19,7 +19,6 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
 * [Setup](#setup)
 * [How to Use](#how-to-use)
     * [ANSI](#ansi)
-        * [ABSOLUTE_PATH](#absolute_path)
         * [4BIT](#ansi-4bit)
         * [VT100](#ansi-vt100)
         * [RAINBOW](#ansi-rainbow)
