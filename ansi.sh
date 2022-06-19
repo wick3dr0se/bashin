@@ -4,24 +4,24 @@
 	local bg_clr fg_clr fx col
 	declare -A bg_clr fg_clr fx
 bg_clr=(
-[black]=40	[bright_black]=100
-[red]=41	[bright_red]=101
-[green]=42	[bright_green]=102
-[yellow]=43	[bright_yellow]=103
-[blue]=44	[bright_blue]=104
-[purple]=45	[bright_purple]=105
-[light-blue]=46	[bright_light_blue]=106
-[white]=47	[bright_white]=107
+[black]=40
+[red]=41
+[green]=42
+[yellow]=43
+[blue]=44
+[purple]=45
+[light-blue]=46
+[white]=47
 )
 fg_clr=(
-[black]=30	[bright_black]=90
-[red]=31	[bright_red]=91
-[green]=32	[bright_green]=92
-[yellow]=33	[bright_yellow]=93
-[blue]=34	[bright_blue]=94
-[purple]=35	[bright_purple]=95
-[light-blue]=36	[bright_light_blue]=96
-[white]=37	[bright_white]=97
+[black]=30
+[red]=31
+[green]=32
+[yellow]=33
+[blue]=34
+[purple]=35
+[light-blue]=36
+[white]=37
 )
 fx=(
 [bold]=1
@@ -29,10 +29,10 @@ fx=(
 [italic]=3
 [underline]=4
 [blink]=5
-[fast-blink]=6
+[blink-fast]=6
 [reverse]=7
 [hidden]=8
-[strikeout]=9
+[strike]=9
 )
 
 	for col in ${!fg_clr[@]} ${!bg_clr[@]} ${!fx[@]} ; do
@@ -68,7 +68,7 @@ cursor=(
 )
 erase=(
 [cursor]='\e[J'
-[^cursor-start]='\e[1J'
+[^cursor]='\e[1J'
 [screen]='\e[2J'
 [saved]='\e[3J'
 [row]='\e[K'
