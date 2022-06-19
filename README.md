@@ -61,32 +61,34 @@ source bashin
 
 ### ANSI [4BIT]
 
-> `4BIT '<string>' <fg-color> <bg-color> <style>` or
+> `4BIT '<string>' <fg-color> <bg-color> <style>`
+
+or
 
 > `4BIT '<string>' <fg-color> <style>`
 
 ### [4BIT]-foreground color & background color params:
 
-`black` - set fg/bg color to black
-`red` - set fg/bg color to red
-`green` - set fg/bg color to green
-`yellow` - set fg/bg.color to yellow
-`blue` - set fg/bg color to blue
-`purple` - set fg/bg color to purple
-`light-blue` - set fg/bg color to light blue
+`black` - set fg/bg color to black  
+`red` - set fg/bg color to red  
+`green` - set fg/bg color to green  
+`yellow` - set fg/bg.color to yellow  
+`blue` - set fg/bg color to blue  
+`purple` - set fg/bg color to purple  
+`light-blue` - set fg/bg color to light blue  
 `white` - set fg/bg color to white
 
 ### [4BIT]-style params:
 
-`bold` - set bold style
-`dim` - set faint style
-`italic` - set italic style
-`underline` - set underline style
-`blink` - set blinking style
-`blink-fast` - set rapid blinking style
-`inverse` - set inverse style
-`hidden` - set hidden style
-`strike` - set cross out style
+`bold` - set bold style  
+`dim` - set faint style  
+`italic` - set italic style  
+`underline` - set underline style  
+`blink` - set blinking style  
+`blink-fast` - set rapid blinking style  
+`inverse` - set inverse style  
+`hidden` - set hidden style  
+`strike` - set cross out style  
 
 ---
 
@@ -96,28 +98,28 @@ source bashin
 
 ### [VT100]-cursor params:
 
-`home` - move cursor to 0,0
-`position-n-n` - move cursor to row #n, col $n
-`up-n` - move up #n rows
-`down-n` - move down #n rows
-`right-n` - move right #n columns
-`left-n` - move left #n columns
-`^down-n` - move down to beginning of row #n
-`^up-n` - move up to beginning of row #n
-`col-n` - move cursor to column #n
-`cursor` - get cursor position
-`up-scroll` - move up 1 row & scroll
-`save` - save cursor position
+`home` - move cursor to 0,0  
+`position-n-n` - move cursor to row #n, col $n  
+`up-n` - move up #n rows  
+`down-n` - move down #n rows  
+`right-n` - move right #n columns  
+`left-n` - move left #n columns  
+`^down-n` - move down to beginning of row #n  
+`^up-n` - move up to beginning of row #n  
+`col-n` - move cursor to column #n  
+`cursor` - get cursor position  
+`up-scroll` - move up 1 row & scroll  
+`save` - save cursor position  
 `restore` - restore cursor to the last save position
 
 ### [VT100]-erase params:
 
-`cursor` - erase from cursor to end of screen
-`^cursor` - erase from beg of screen to cursor
-`screen` - erase entire screen
-`saved` - erase saved rows
-`row` - erase from cursor to end of row
-`^row` - erase start of row to cursor
+`cursor` - erase from cursor to end of screen  
+`^cursor` - erase from beg of screen to cursor  
+`screen` - erase entire screen  
+`saved` - erase saved rows  
+`row` - erase from cursor to end of row  
+`^row` - erase start of row to cursor  
 `^row$` - erase the entire row
 
 ---
