@@ -3,12 +3,15 @@
 
 set -a
 
-ABSOLUTE_PATH() {
-	local var
-	[[ $1 ]] && var="/${1}" || var=
-	[[ $0 == bashin ]] && echo "${var#/}" || echo "${BASH_SOURCE%/*}${var}"
+SOURCE() {
+	local var i
+	[[ $0 == bashin ]] || var="${BASH_SOURCE%/*}"
+
+	for i in "$@" ; do
+		i="/${i}"
+		[[ $1 ]] || i='./*'
+		. ${var}${i}
+	done
 }
 
-. $(ABSOLUTE_PATH 'ansi.sh')
-. $(ABSOLUTE_PATH 'arithmetic.sh')
-. $(ABSOLUTE_PATH 'string-manipulation.sh')
+SOURCE 'ansi.sh' 'arithmetic.sh' 'string-manipulation.sh'
