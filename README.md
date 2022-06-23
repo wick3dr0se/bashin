@@ -25,9 +25,10 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
     * [Arithmetic](#arithmetic)
         * [INCREMENT](#increment)
         * [DECREMENT](#decrement)
+        * [POWER](#power)
         * [MULTIPLY](#multiply)
         * [DIVIDE](#divide)
-        * [MODULO](#modulo)
+        * [REMAINDER](#remainder)
         * [ADD](#add)
         * [SUBTRACT](#subtract)
     * [String Manipulation](#string-manipulation)
@@ -57,7 +58,7 @@ source bashin
 <div align="center"><h2>ANSI</h2></div>
 
 ### ANSI [4BIT]
-
+text colors and styles
 > `4BIT '<string>' <fg-color> <bg-color> <style>`
 
 or
@@ -87,12 +88,12 @@ or
 `blink-fast` - set rapid blinking style  
 `inverse` - set inverse style  
 `hidden` - set hidden style  
-`strike` - set cross out style  
+`strike` - set strikeout style  
 
 ---
 
 ### ANSI [VT100]
-
+terminal control
 > `VT100 '<cursor>' '<erase>'`
 
 ### [VT100]-cursor params:
@@ -126,7 +127,7 @@ or
 ---
 
 ### ANSI [RAINBOW]
-
+colorize a specified string, variable or array per character
 > `RAINBOW '<string>'`
 
 ---
@@ -134,43 +135,49 @@ or
 <div align="center"><h2>Arithmetic</h2></div>
 
 ### [INCREMENT]
-
+when specified, from start increment to a maximum
 > `INCREMENT <start> + <increment> = <max>`
 
 ---
 
 ### [DECREMENT]
+when specified, from start decrement to a minimum
+> `DECREMENT <start> - <decrement> = <min>`
 
-> `DECREMENT <start> - <decrement> = <max>`
+---
+
+### [POWER]
+x to the power of y
+> `POWER <x> ^ <y>.
 
 ---
 
 ### [MULTIPLY]
-
+multiply x and y
 > `MULTIPLY <x> * or x <y>`
 
 ---
 
 ### [DIVIDE]
-
-> `DIVIDE <numerator> / <denominator>`
+divide x by y
+> `DIVIDE <x> / <y>`
 
 ---
 
-### [MODULO]
-
-> `MODULO <numerator> % <denominator>`
+### [REMAINDER]
+remainder of x by y
+> `REMAINDER <x> % <y>`
 
 ---
 
 ### [ADD]
-
+add x to y
 > `ADD <x> + <y>`
 
 ---
 
 ### [SUBTRACT]
-
+subtract x from y
 > `SUBTRACT <x> - <y>`
 
 ---
@@ -178,22 +185,23 @@ or
 <div align="center"><h2>String Manipulation</h2></div>
 
 ### [RANDOM_ELEMENT]
-
+fetch a random element from an array
 > `RANDOM_ELEMENT  "<array[@]>"`
 
 ---
 
 ### [UNIQUE_ELEMENT]
-
+when two arrays are specified, UNIQUE_ELEMENT gets unique elements not found in both arrays
 > `UNIQUE_ELEMENT "<array1[@]>" "<array2[@]>"`
 
 ---
 
 <div align="center"><h2>Miscellaneous</h2></div>
 
-### [ABSOLUTE_PATH]
+### [SOURCE]
+gets absolute path while sourcing multiple specified files. if no argument is supplied, SOURCE sources everything in path
 
-> `ABSOLUTE_PATH '<script_name>'`
+> `SOURCE '<script_name>'`
 
 ---
 
