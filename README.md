@@ -35,6 +35,7 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
         * [RANDOM_ELEMENT](#random_element)
         * [UNIQUE_ELEMENT](#unique_element)
     * [Miscellaneous](#miscellaneous)
+        * [SOURCE](#source)
 * [Communication](#communication)
 
 # Setup
