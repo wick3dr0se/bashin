@@ -1,28 +1,19 @@
 #!/bin/bash
 
 4BIT() {
-	local bg_clr fg_clr fx col
-	declare -A bg_clr fg_clr fx
-bg_clr=(
-[black]=40
-[red]=41
-[green]=42
-[yellow]=43
-[blue]=44
-[purple]=45
-[light-blue]=46
-[white]=47
+	local clr fx a b c d
+	declare -A clr fx
+clr=(
+[black]=0
+[red]=1
+[green]=2
+[yellow]=3
+[blue]=4
+[purple]=5
+[light-blue]=6
+[white]=7
 )
-fg_clr=(
-[black]=30
-[red]=31
-[green]=32
-[yellow]=33
-[blue]=34
-[purple]=35
-[light-blue]=36
-[white]=37
-)
+
 fx=(
 [bold]=1
 [dim]=2
@@ -35,14 +26,15 @@ fx=(
 [strike]=9
 )
 
-	for col in ${!fg_clr[@]} ${!bg_clr[@]} ${!fx[@]} ; do
-		case $col in
-			$2) fg_clr="${fg_clr[$col]}" ;;
-			$3) [[ $4 ]] && bg_clr="${bg_clr[$col]};" || fx="${fx[$col]};" ;;
-			$4) fx="${fx[$col]};" ;;
-		esac
-	done
-	printf '\e[%s%s%sm%s\e[0m\n' "$fx" "$bg_clr" "$fg_clr" "$1"
+	[[ $2 ]] && d="3${clr[$2]}"
+	[[ $3 ]] && {
+	      	[[ ${!clr[@]} =~ $3 ]] && c="4${clr[$3]};" || c="${fx[$3]};"
+	}
+	[[ $4 ]] && b="${fx[$4]};"
+	[[ $5 ]] && a="${fx[$5]};"
+	
+	printf '\e[%s%s%s%sm%s\e[0m\n' "$a" "$b" "$c" "$d" "$1"
+
 }
 
 VT100() {
