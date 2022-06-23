@@ -14,6 +14,8 @@ Many scripters resort to external commands that could be instead handled elegant
 
 Bashin handles things like ANSI escape sequences that make coloring, positioning and other modifications much more simple (like a TUI)
 
+Bashin loves bashisms
+
 <div align="center"><h1>Contents</h1></div>
 
 * [Setup](#setup)
