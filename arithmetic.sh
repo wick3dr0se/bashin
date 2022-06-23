@@ -24,6 +24,14 @@ DECREMENT() {
 	echo
 }
 
+POWER() {
+	local x y
+	
+	IFS='^' read x y <<<${@%.*}
+
+	echo $((x**y))
+}
+
 DIVIDE() {
 	local x y
 
