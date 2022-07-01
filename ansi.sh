@@ -1,6 +1,6 @@
 #!/bin/bash
 
-4BIT() {
+4bit() {
 	local clr fx a b c d
 	declare -A clr fx
 clr=(
@@ -37,7 +37,7 @@ fx=(
 
 }
 
-VT100() {
+vt100() {
 	local cursor var1 var2 erase col
 
 	IFS=- read x var1 var2 <<<$1
@@ -78,7 +78,7 @@ erase=(
 	printf "${cursor}${erase}"
 }
 
-RAINBOW() {
+rainbow() {
 	local clr char
 
 	clr=1

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-RANDOM_ELEMENT() {
+random_element() {
 	local var
 
 	var=($@)
 	echo "${var[RANDOM%${#var[@]}]}"
 }
 
-UNIQUE_ELEMENT() {
+unique_element() {
 	local col var1 var2
 
 	for col in ${arr1[@]} ; do
