@@ -35,17 +35,13 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
 
 clone the repository
 
-`git clone https://github.com/wick3dr0se/bashin && cd bashin/`
+`git clone https://github.com/wick3dr0se/bashin`
 
 source bashin within another script
 
 `. ~/.bashin`
 
-or append to your .bashrc to use interactively & globally
-
-then, copy bashin to your home directory
-
-`cd ../ && cp -r bashin ~/.bashin`
+or source in your .bashrc to use interactively & globally
 
 # How to Use
 
