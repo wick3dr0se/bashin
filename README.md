@@ -37,15 +37,15 @@ clone the repository
 
 `git clone https://github.com/wick3dr0se/bashin && cd bashin/`
 
-copy bashin to your home directory
-
-`cp .bashin $HOME/`
-
-source bashin
+source bashin within another script
 
 `. ~/.bashin`
 
-*append to your .bashrc to use interactively & globally*
+or append to your .bashrc to use interactively & globally
+
+then, copy bashin to your home directory
+
+`cd ../ && cp -r bashin ~/.bashin`
 
 # How to Use
 
