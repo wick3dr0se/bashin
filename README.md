@@ -1,6 +1,6 @@
 <div align="center">
 <h1>bashin</h1>
-<p>A minimal pure BASH framework</p>
+<p>A minimal BASH framework</p>
 
 <img src="https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white"></img>
 <img src="https://img.shields.io/badge/Made%20with-Bash-1f425f.svg"></img>
@@ -8,11 +8,13 @@
 <img src="https://badge-size.herokuapp.com/wick3dr0se/bashin/master/bashin"></img>
 </div>
 
-Bashin is a framework intended to be as minimal and clean as possible. Wrote in BASH & C, bashin aims for speed and ingenuity
+Bashin is a framework intended to be as minimal and clean as possible. Wrote in C and BASH, bashin aims for speed and ingenuity
 
-Many scripters resort to external commands that could be instead handled elegantly with builtins. Bashin can be used as a calculator e.g. `math '5*(2+3)-8'` output: `17`, among many other things; Ran interactively or from within another script
+Many scripters resort to slow external commands glued together with pipes and subshells. Not only is bashin much faster but by extending BASH with C, BASH is capable of so much more
 
-Bashin handles things like ANSI escape sequences that make coloring, positioning and other modifications much more simple (like a TUI)
+Bashin can be used to handle advanced arithmetic in precedence, e.g. `math '5*(2+3)-8'` output: `17`, among many other things; Ran interactively or from within another script
+
+Bashin handles things like ANSI escape sequences that make coloring, positioning and other modifications way more simple (like a TUI)
 
 <div align="center"><h1>Contents</h1></div>
 
@@ -44,10 +46,6 @@ source bashin
 `. ~/.bashin`
 
 *append to your .bashrc to use interactively & globally*
-
-to use `math` compile arithmetic
-
-`gcc -lm arithmetic.c tinyexpr.c -o arithmetic`
 
 # How to Use
 
