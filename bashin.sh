@@ -3,24 +3,29 @@
 set -a
 
 _source() {
-	local var i
-	[[ $0 == bashin.sh ]] || var="${BASH_SOURCE%/*}"
+	[[ $0 == bashin.sh ]] || path="${BASH_SOURCE%/*}"
 
 	for i in "$@" ; do
 		i="/${i/.sh}.sh"
+
 		[[ $1 ]] || i='./*'
-		. ${var}${i}
+		
+    . "${path}${i}"
 	done
 }
 
 _run() {
-  path="$HOME/.bashin"
+  [[ $path == . ]] && {
+    path="${PWD##*/}"
 
-  "$path/$1" < <(echo $input)
+    [[ -f ${HOME}/${path} ]] || path=".${path}"
+  }
+
+  "${HOME}/${path}/${1}" < <(echo "$input")
 }
 
 math() {
-  input=$@
+  input="$@"
 
   _run 'arithmetic'
 }
