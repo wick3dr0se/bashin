@@ -38,21 +38,19 @@ fx=(
 }
 
 vt100() {
-	local cursor var1 var2 erase col
-
-	IFS=- read x var1 var2 <<<$1
+	local cursor erase var
 
 	declare -A cursor erase
 cursor=(
 [home]='\e[H'
-[position]="\e[${var1};${var2}H"
-[up]="\e[${var1}A"
-[down]="\e[${var1}B"
-[right]="\e[${var1}C"
-[left]="\e[${var1}1D"
-[^down]="\e[${var1}E"
-[^up]="\e[${var1}F"
-[col]="\e[${var1}G"
+[position]="\e[H"
+[up]="\e[A"
+[down]="\e[B"
+[right]="\e[C"
+[left]="\e[D"
+[^down]="\e[E"
+[^up]="\e[F"
+[col]="\e[G"
 [cursor]='\e[6n'
 [up-scroll]='\M'
 [save]='\7'
@@ -68,14 +66,19 @@ erase=(
 [^row$]='\e[2K'
 )
 
-	for col in ${!cursor[@]} ${!erase[@]} ; do
-		case $col in
-			${1/-*}) cursor="${cursor[$col]}" ;;
-			$2) erase="${erase[$col]}" ;;
-		esac
-	done
+  [[ $1 =~ - ]] && var=${1/*[a-z]-} && var=${var/-/;}
+  cursor="${cursor[${1%%-*}]::-1}${var}${cursor[${1%%-*}]##*[}"
 
-	printf "${cursor}${erase}"
+  if [[ ${!erase[@]} =~ ${2%%-*} ]] ; then
+    [[ $2 ]] && erase=${erase[${2%%-*}]}
+  elif [[ ${!cursor[@]} =~ ${2%%-*} ]] ; then
+    [[ $2 =~ - ]] && var=${2/*[a-z]-}
+    cursor+="${cursor[${2%%-*}]::-1}${var}${cursor[${2%%-*}]##*[}"
+  fi
+
+  [[ $3 ]] && erase+=${erase[${3%%-*}]}
+
+  printf "${cursor}${erase}"
 }
 
 rainbow() {
