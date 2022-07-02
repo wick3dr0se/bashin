@@ -21,8 +21,8 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
 * [Setup](#setup)
 * [How to Use](#how-to-use)
     * [ANSI](#ansi)
-        * [4bit](#ansi-4bit)
-        * [vt100](#ansi-vt100)
+        * [SGR](#ansi-sgr)
+        * [VT100](#ansi-vt100)
         * [rainbow](#ansi-rainbow)
     * [Arithmetic](#arithmetic)
         * [math](#math)
@@ -47,15 +47,15 @@ or source in your .bashrc to use interactively & globally
 
 <div align="center"><h2>ANSI</h2></div>
 
-### ANSI [4bit]
+### ANSI [sgr]
 text colors and styles
-> `4bit '<string>' <fg-color> <bg-color> <style>`
+> `sgr '<string>' <fg-color> <bg-color> <style>`
 
 or
 
-> `4bit '<string>' <fg-color> <style>`
+> `sgr '<string>' <fg-color> <style>`
 
-### [4bit]-foreground color & background color params:
+### [sgr]-foreground color & background color params:
 
 `black` - set fg/bg color to black
 `red` - set fg/bg color to red
@@ -68,7 +68,7 @@ or
 
 ---
 
-### [4bit]-style params:
+### [sgr]-style params:
 
 `bold` - set bold style  
 `dim` - set faint style  

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-4bit() {
-	local clr fx a b c d
+sgr() {
+	local clr fx fg_clr bg_clr
 	declare -A clr fx
 clr=(
 [black]=0
@@ -25,21 +25,32 @@ fx=(
 [hidden]=8
 [strike]=9
 )
+  fg_clr=3
+  bg_clr=4
 
-	[[ $2 ]] && d="3${clr[$2]}"
-	[[ $3 ]] && {
-	      	[[ ${!clr[@]} =~ $3 ]] && c="4${clr[$3]};" || c="${fx[$3]};"
-	}
-	[[ $4 ]] && b="${fx[$4]};"
-	[[ $5 ]] && a="${fx[$5]};"
-	
-	printf '\e[%s%s%s%sm%s\e[0m\n' "$a" "$b" "$c" "$d" "$1"
+  [[ $2 ]] && fg_clr+=${clr[$2]}
+  [[ $3 ]] && fg_clr+=';'
 
+  if [[ ${!fx[@]} =~ $3 ]] ; then
+    fx=${fx[$3]}
+  elif [[ ${!clr[@]} =~ $3 ]] ; then
+    bg_clr+="${clr[$3]}"
+  fi
+
+  clr=${fg_clr}${bg_clr}
+  [[ $4 ]] && {
+    fx+=${fx[$4]}
+    clr+=';'
+  }
+  [[ $5 ]] && {
+    fx+=';'
+    fx+=${fx[$5]}
+  }
+  printf '\e[%sm%s\e[0m\n' "${clr}${fx}" "$1"
 }
 
 vt100() {
 	local cursor erase var
-
 	declare -A cursor erase
 cursor=(
 [home]='\e[H'
