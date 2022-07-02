@@ -21,14 +21,14 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
 * [Setup](#setup)
 * [How to Use](#how-to-use)
     * [ANSI](#ansi)
-        * [SGR](#ansi-sgr)
-        * [VT100](#ansi-vt100)
-        * [rainbow](#ansi-rainbow)
+        * [[sgr]](#ansi-sgr)
+        * [[vt100]](#ansi-vt100)
+        * [[rainbow]](#ansi-rainbow)
     * [Arithmetic](#arithmetic)
-        * [math](#math)
+        * [[math]](#math)
     * [String Manipulation](#string-manipulation)
-        * [random_element](#random_element)
-        * [unique_element](#unique_element)
+        * [[random_element]](#random_element)
+        * [[unique_element]](#unique_element)
 * [Communication](#communication)
 
 # Setup
@@ -57,13 +57,13 @@ or
 
 ### [sgr]-foreground color & background color params:
 
-`black` - set fg/bg color to black
-`red` - set fg/bg color to red
-`green` - set fg/bg color to green
-`yellow` - set fg/bg.color to yellow
-`blue` - set fg/bg color to blue
-`purple` - set fg/bg color to purple 
-`light-blue` - set fg/bg color to light blue  
+`black` - set fg/bg color to black  
+`red` - set fg/bg color to red  
+`green` - set fg/bg color to green  
+`yellow` - set fg/bg.color to yellow  
+`blue` - set fg/bg color to blue  
+`purple` - set fg/bg color to purple  
+`light-blue` - set fg/bg color to light blue   
 `white` - set fg/bg color to white
 
 ---
@@ -78,7 +78,7 @@ or
 `blink-fast` - set rapid blinking style  
 `inverse` - set inverse style  
 `hidden` - set hidden style  
-`strike` - set strikeout style  
+`strike` - set strikeout style
 
 ---
 
@@ -89,14 +89,14 @@ terminal control
 ### [vt100]-cursor params:
 
 `home` - move cursor to 0,0  
-`position-n-n` - move cursor to row #n, col $n  
-`up-n` - move up #n rows  
-`down-n` - move down #n rows  
-`right-n` - move right #n columns  
-`left-n` - move left #n columns  
-`^down-n` - move down to beginning of row #n  
-`^up-n` - move up to beginning of row #n  
-`col-n` - move cursor to column #n  
+`position-n-n` - move cursor to row N, col N  
+`up-n` - move up # rows  
+`down-n` - move down # rows  
+`right-n` - move right # columns  
+`left-n` - move left # columns  
+`^down-n` - move down to beginning of row #  
+`^up-n` - move up to beginning of row #  
+`col-n` - move cursor to column #  
 `cursor` - get cursor position  
 `up-scroll` - move up 1 row & scroll  
 `save` - save cursor position  
