@@ -32,7 +32,8 @@ fx=(
   [[ $3 ]] && fg_clr+=';'
 
   if [[ ${!fx[@]} =~ $3 ]] ; then
-    fx=${fx[$3]}
+    bg_clr=
+    [[ $3 ]] && fx=${fx[$3]}
   elif [[ ${!clr[@]} =~ $3 ]] ; then
     bg_clr+="${clr[$3]}"
   fi
@@ -46,6 +47,7 @@ fx=(
     fx+=';'
     fx+=${fx[$5]}
   }
+
   printf '\e[%sm%s\e[0m\n' "${clr}${fx}" "$1"
 }
 
