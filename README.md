@@ -27,6 +27,9 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
     * [Arithmetic](#arithmetic)
         * [[math]](#math)
     * [String Manipulation](#string-manipulation)
+        * [[regex]](#regex)
+        * [[truncate]](#truncate)
+        * [[strip]](#strip)
         * [[random_element]](#random_element)
         * [[unique_element]](#unique_element)
 * [Communication](#communication)
@@ -44,6 +47,8 @@ source bashin within another script
 or source in your .bashrc to use interactively & globally
 
 # How to Use
+
+*see `usage.sh` for examples*
 
 <div align="center"><h2>ANSI</h2></div>
 
@@ -131,6 +136,23 @@ evaluate an equation by precedence
 ---
 
 <div align="center"><h2>String Manipulation</h2></div>
+
+### [regex]
+match a string by regular expression
+> `regex '<string>' <pattern>`
+---
+
+### [truncate]
+trim all excess whitespace
+> `truncate '  <string> '
+.
+---
+
+### [split]
+split by delimeter
+> `split '<string>' '<delimeter>'`
+
+---
 
 ### [random_element]
 fetch a random element from an array
