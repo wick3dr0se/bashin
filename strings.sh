@@ -1,5 +1,32 @@
 #!/bin/bash
 
+regex() {
+  local i
+
+  for i in $1 ; do
+    [[ $i =~ $2 ]] && echo $BASH_REMATCH
+  done
+}
+
+truncate() {
+  local i string
+
+  for i in $1 ; do
+    string+=" $i"
+  done
+  echo ${string# }
+}
+
+split() {
+  local i string
+
+  IFS="$2" 
+  for i in $1 ; do
+    string+=$i
+  done
+  truncate $string
+}
+
 random_element() {
 	local var
 
