@@ -17,6 +17,16 @@ truncate() {
   echo ${string# }
 }
 
+trim() {
+  : "$1"
+  printf '%s\n' "${_[@]/$2}"
+}
+
+trim_all() {
+  : "$1"
+  printf '%s\n' "${_[@]//$2}"
+}
+
 split() {
   local i string
 
@@ -27,11 +37,25 @@ split() {
   truncate $string
 }
 
-random_element() {
-	local var
+head() {
+  mapfile -tn "$1" row < "$2"
+  printf '%s\n' "${row[@]}"
+}
 
-	var=($@)
-	echo "${var[RANDOM%${#var[@]}]}"
+tail() {
+  mapfile -tn 0 row < "$2"
+  printf '%s\n' "${row[@]: -$1}"
+}
+
+rows() {
+  mapfile -tn 0 rows < "$1"
+  printf '%s\n' "${#rows[@]}"
+}
+
+random_element() {
+	local var=($@)
+	
+  echo "${var[RANDOM%${#var[@]}]}"
 }
 
 unique_element() {
