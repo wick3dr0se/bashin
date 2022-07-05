@@ -20,7 +20,7 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
 
 * [Setup](#setup)
 * [How to Use](#how-to-use)
-    * [ANSI](#ansi)
+    * [ANSI Escape Sequencss](#ansi-escape-sequences)
         * [[sgr]](#ansi-sgr)
         * [[vt100]](#ansi-vt100)
         * [[rainbow]](#ansi-rainbow)
@@ -29,7 +29,12 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
     * [String Manipulation](#string-manipulation)
         * [[regex]](#regex)
         * [[truncate]](#truncate)
-        * [[strip]](#strip)
+        * [[trim]](#trim)
+        * [[trim_all]](#trim_all)
+        * [[split]](#split)
+        * [[head]](#head)
+        * [[tail]](#tail)
+        * [[rows]](#rows)
         * [[random_element]](#random_element)
         * [[unique_element]](#unique_element)
 * [Communication](#communication)
@@ -50,7 +55,7 @@ or source in your .bashrc to use interactively & globally
 
 *see `usage.sh` for examples*
 
-<div align="center"><h2>ANSI</h2></div>
+<div align="center"><h2>ANSI escape sequences</h2></div>
 
 ### ANSI [sgr]
 text colors and styles
@@ -140,13 +145,20 @@ evaluate an equation by precedence
 ### [regex]
 match a string by regular expression
 > `regex '<string>' <pattern>`
+
 ---
 
 ### [truncate]
 trim all excess whitespace
-> `truncate '  <string> '
-.
----
+> `truncate '  <string> '`
+
+### [trim]
+remove a given value from string
+> `trim '<string>' '<value>'`
+
+### [trim_all]
+remove all cases of given value from string
+> `trim_all '<string> <value>'`
 
 ### [split]
 split by delimeter
@@ -154,11 +166,25 @@ split by delimeter
 
 ---
 
+### [head]
+output the first N rows of a specified file
+> `head <N> <file>`
+
+### [tail]
+output the last N rows of a specified file
+> `tail <N> <file>`
+
+---
+
+### [rows]
+get a row count from a specified file
+> `rows <file>`
+
+---
+
 ### [random_element]
 fetch a random element from an array
 > `random_element  "<array[@]>"`
-
----
 
 ### [unique_element]
 when two arrays are specified, unique_element gets unique elements not found in both arrays
