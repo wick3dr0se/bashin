@@ -5,7 +5,9 @@
 <img src="https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white"></img>
 <img src="https://img.shields.io/badge/Made%20with-Bash-1f425f.svg"></img>
 <img src=https://img.shields.io/badge/Maintained%3F-yes-green.svg></img>
-<img src="https://badge-size.herokuapp.com/wick3dr0se/bashin/master/bashin"></img>
+<img src="https://badge-size.herokuapp.com/wick3dr0se/bashin/master/bashin"></img>  
+<a href="https://discord.gg/TstuWvDzXr">
+<img src="https://discordapp.com/api/guilds/913584348937207839/widget.png?style=shield"/></a>
 </div>
 
 Bashin is a framework intended to be as minimal and clean as possible. Wrote in C and BASH, bashin aims for speed and ingenuity
@@ -42,12 +44,14 @@ Bashin handles things like ANSI escape sequences that make coloring, positioning
 # Setup
 
 clone the repository
-
-`git clone https://github.com/wick3dr0se/bashin`
+```bash
+git clone https://github.com/wick3dr0se/bashin
+```
 
 source bashin within another script
-
-`. ~/.bashin`
+```bash
+. ~/.bashin
+```
 
 or source in your .bashrc to use interactively & globally
 
@@ -59,11 +63,13 @@ or source in your .bashrc to use interactively & globally
 
 ### ANSI [sgr]
 text colors and styles
-> `sgr '<string>' <fg-color> <bg-color> <style>`
-
+```bash
+sgr '<string>' <fg-color> <bg-color> <style>
+```
 or
-
-> `sgr '<string>' <fg-color> <style>`
+```bash
+sgr '<string>' <fg-color> <style>
+```
 
 ### [sgr]-foreground color & background color params:
 
@@ -94,7 +100,9 @@ or
 
 ### ANSI [vt100]
 terminal control
-> `vt100 '<cursor>' '<erase>'`
+```bash
+vt100 '<cursor>' '<erase>'
+```
 
 ### [vt100]-cursor params:
 
@@ -128,70 +136,86 @@ terminal control
 
 ### ANSI [rainbow]
 colorize a specified string, variable or array per character
-> `rainbow '<string>'`
-
----
+```bash
+rainbow '<string>'
+```
 
 <div align="center"><h2>Arithmetic</h2></div>
 
 ### [math]
 evaluate an equation by precedence
-> `math '<c*(a+b)-d>'`
-
----
+```bash
+math '<c*(a+b)-d>'
+```
 
 <div align="center"><h2>String Manipulation</h2></div>
 
 ### [regex]
 match a string by regular expression
-> `regex '<string>' <pattern>`
+```bash
+regex '<string>' <pattern>
+```
 
 ---
 
 ### [truncate]
 trim all excess whitespace
-> `truncate '  <string> '`
+```bash
+truncate '  <string> '
+```
 
 ### [trim]
 remove a given value from string
-> `trim '<string>' '<value>'`
+```bash
+trim '<string>' '<value>'
+```
 
 ### [trim_all]
 remove all cases of given value from string
-> `trim_all '<string> <value>'`
+```bash
+trim_all '<string> <value>'
+```
 
 ### [split]
 split by delimeter
-> `split '<string>' '<delimeter>'`
+```bash
+split '<string>' '<delimeter>'
+```
 
 ---
 
 ### [head]
 output the first N rows of a specified file
-> `head <N> <file>`
+```bash
+head <N> <file>
+```
 
 ### [tail]
 output the last N rows of a specified file
-> `tail <N> <file>`
+```bash
+tail <N> <file>
+```
 
 ---
 
 ### [rows]
 get a row count from a specified file
-> `rows <file>`
+```bash
+rows <file>
+```
 
 ---
 
 ### [random_element]
 fetch a random element from an array
-> `random_element  "<array[@]>"`
-
-### [unique_element]
-when two arrays are specified, unique_element gets unique elements not found in both arrays
-> `unique_element "<array1[@]>" "<array2[@]>"`
+```bash
+random_element  "<array[@]>"
+```
 
 ---
 
-# Communication
-
-[discord](https://discord.gg/TstuWvDzXr)
+### [unique_element]
+when two arrays are specified, unique_element gets unique elements not found in both arrays
+```bash
+unique_element "<array1[@]>" "<array2[@]>"
+```
