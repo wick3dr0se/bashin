@@ -6,25 +6,33 @@
 <img src="https://img.shields.io/badge/Made%20with-Bash-1f425f.svg"></img>
 <img src=https://img.shields.io/badge/Maintained%3F-yes-green.svg></img>
 <img src="https://badge-size.herokuapp.com/wick3dr0se/bashin/master/bashin"></img>  
-<a href="https://discord.gg/TstuWvDzXr">
+<a href="https://discord.gg/W4mQqNnfSq">
 <img src="https://discordapp.com/api/guilds/913584348937207839/widget.png?style=shield"/></a>
 </div>
 
-Bashin is a framework intended to be as minimal and clean as possible. Wrote in C and BASH, bashin aims for speed and ingenuity
+Bashin is an extension of BASH intended to be as minimal and clean as possible; Wrote in pure BASH with (floating point) arithmetic evaluation borrowed from C, bashin is super fast
 
-Many scripters resort to slow external commands glued together with pipes and subshells. Not only is bashin much faster but by extending BASH with C, BASH is capable of so much more
+Many scripters resort to slow external commands glued together with pipes and subshells. Of course they have their use cases but generally (for performance sake) they should be avoided
 
-Bashin can be used to handle advanced arithmetic in precedence, e.g. `math '5*(2+3)-8'` output: `17`, among many other things; Ran interactively or from within another script
+Bashin can be used to handle advanced arithmetic in precedence, e.g:
 
-Bashin handles things like ANSI escape sequences that make coloring, positioning and other modifications way more simple (like a TUI)
+```bash
+  math '5*(2+3)-8'
+```
+
+> 17
+
+— Among many other things; Ran interactively or from within another script
+
+Bashin handles ANSI escape sequences that make coloring, positioning and other modifications way more simple (like a TUI)
 
 <div align="center"><h1>Contents</h1></div>
 
 * [Setup](#setup)
 * [How to Use](#how-to-use)
     * [ANSI Escape Sequencss](#ansi-escape-sequences)
-        * [[sgr]](#ansi-sgr)
-        * [[vt100]](#ansi-vt100)
+        * [[style]](#ansi-style)
+        * [[cursor]](#ansi-cursor)
         * [[rainbow]](#ansi-rainbow)
     * [Arithmetic](#arithmetic)
         * [[math]](#math)
@@ -61,30 +69,26 @@ or source in your .bashrc to use interactively & globally
 
 <div align="center"><h2>ANSI escape sequences</h2></div>
 
-### ANSI [sgr]
-text colors and styles
+### ANSI [style]
+text colors and styles (accepts endless arguments)
 ```bash
-sgr '<string>' <fg-color> <bg-color> <style>
-```
-or
-```bash
-sgr '<string>' <fg-color> <style>
+style fg-<color> bg-<color> <mode>
 ```
 
-### [sgr]-foreground color & background color params:
+### [style]-color params:
 
 `black` - set fg/bg color to black  
 `red` - set fg/bg color to red  
 `green` - set fg/bg color to green  
-`yellow` - set fg/bg.color to yellow  
+`yellow` - set fg/bg color to yellow  
 `blue` - set fg/bg color to blue  
 `purple` - set fg/bg color to purple  
-`light-blue` - set fg/bg color to light blue   
+`cyan` - set fg/bg color to cyan    
 `white` - set fg/bg color to white
 
 ---
 
-### [sgr]-style params:
+### [style]-mode params:
 
 `bold` - set bold style  
 `dim` - set faint style  
@@ -98,39 +102,37 @@ sgr '<string>' <fg-color> <style>
 
 ---
 
-### ANSI [vt100]
-terminal control
+### ANSI [cursor]
+terminal control (accepts endless arguments)
 ```bash
-vt100 '<cursor>' '<erase>'
+vt100 '<position>' '<erase>'
 ```
 
-### [vt100]-cursor params:
+### [cursor]-position params:
 
-`home` - move cursor to 0,0  
-`position-n-n` - move cursor to row N, col N  
-`up-n` - move up # rows  
-`down-n` - move down # rows  
-`right-n` - move right # columns  
-`left-n` - move left # columns  
-`^down-n` - move down to beginning of row #  
-`^up-n` - move up to beginning of row #  
-`col-n` - move cursor to column #  
-`cursor` - get cursor position  
-`up-scroll` - move up 1 row & scroll  
+`pos` - move cursor to row N, col N or 0,0  
+`up` - move up # rows  
+`down` - move down # rows  
+`right` - move right # columns  
+`left` - move left # columns  
+`down:start` - move down to beginning of row #  
+`up:start` - move up to beginning of row #  
+`col` - move cursor to column #   
+`up:scroll` - move up 1 row & scroll  
 `save` - save cursor position  
 `restore` - restore cursor to the last save position
 
 ---
 
-### [vt100]-erase params:
+### [cursor]-erase params:
 
-`cursor` - erase from cursor to end of screen  
-`^cursor` - erase from beg of screen to cursor  
-`screen` - erase entire screen  
-`saved` - erase saved rows  
-`row` - erase from cursor to end of row  
-`^row` - erase start of row to cursor  
-`^row$` - erase the entire row
+`?screen:end` - erase from cursor to end of screen  
+`?screen:beg` - erase from beg of screen to cursor  
+`?screen` - erase entire screen  
+`?row:saved` - erase saved row  
+`?row:end` - erase from cursor to end of row  
+`?row:start` - erase start of row to cursor  
+`?row` - erase the entire row
 
 ---
 
@@ -206,16 +208,16 @@ rows <file>
 
 ---
 
-### [random_element]
-fetch a random element from an array
+### [random]
+fetch a random element from string; variable or array
 ```bash
-random_element  "<array[@]>"
+random  "<array[@]>"
 ```
 
 ---
 
-### [unique_element]
-when two arrays are specified, unique_element gets unique elements not found in both arrays
+### [unique]
+unique gets unique elements not found in both strings; variable or array
 ```bash
-unique_element "<array1[@]>" "<array2[@]>"
+unique "<array1[@]>" "<array2[@]>"
 ```
