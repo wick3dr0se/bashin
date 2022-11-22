@@ -105,7 +105,7 @@ style fg-<color> bg-<color> <mode>
 ### ANSI [cursor]
 terminal control (accepts endless arguments)
 ```bash
-vt100 '<position>' '<erase>'
+cursor '<position>' '<erase>'
 ```
 
 ### [cursor]-position params:

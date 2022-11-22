@@ -79,7 +79,7 @@ style(){
   opt 'underline' 4 # underline
   opt 'blink' 5 # blink
   opt 'rapid-blink blink-fast' 6 # rapid blink
-  opt 'reverse' 7 # reverse
+  opt 'inverse reverse' 7 # inverse
   opt 'hidden' 8 # hidden
   opt 'strike strikeout' 9 # strikeout
 
@@ -191,4 +191,3 @@ unique() {
 math() {
   "$PWD/arithmetic" < <(echo "$@")
 }
-math
