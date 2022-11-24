@@ -52,7 +52,6 @@ cursor(){ # position cursor or erase terminal content
     fi
   done
 
-  n="${vt100//[]}"
   shift ${#vt100[@]}
   printf '%b' "${vt100[*]}" "$*"
 }
