@@ -35,7 +35,7 @@ cursor(){ # position cursor or erase terminal content
   type [on,off] = 25h 25l
   type [up,down,right,left] = A B C D
   type [down-beg,up-beg,up-scroll] = E F M
-  type [col, pos] = G H
+  type [col,pos] = G H
   type [save,restore] = 7 8
   
   type [?screen:end,?screen:beg,?screen] = J 1J 2J
