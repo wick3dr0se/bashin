@@ -44,33 +44,35 @@ Bashin handles ANSI escape sequences that make coloring, positioning and other m
         * [[split]](#split)
         * [[head]](#head)
         * [[tail]](#tail)
-        * [[rows]](#rows)
-        * [[random_element]](#random_element)
-        * [[unique_element]](#unique_element)
+        * [[lines]](#lines)
+        * [[random]](#random)
+        * [[unique]](#unique)
 * [Communication](#communication)
 
 # Setup
 
 clone the repository
 ```bash
-git clone https://github.com/wick3dr0se/bashin
+git clone https://github.com/wick3dr0se/bashin&& cd "${_##*/}"
 ```
 
 source bashin within another script
 ```bash
-. ~/.bashin
+<path>/bashin
+# or
+. <path>/bashin
 ```
 
-or source in your .bashrc to use interactively & globally
+*source within your ~/.bashrc to use interactively & globally*
 
 # How to Use
 
-*see `usage.sh` for examples*
+see `usage.sh` for examples
 
 <div align="center"><h2>ANSI escape sequences</h2></div>
 
 ### ANSI [style]
-text colors and styles (accepts endless arguments)
+text colors and styles (accepts countless arguments)
 ```bash
 style fg-<color> bg-<color> <mode>
 ```
@@ -95,15 +97,15 @@ style fg-<color> bg-<color> <mode>
 `italic` - set italic style  
 `underline` - set underline style  
 `blink` - set blinking style  
-`blink-fast` - set rapid blinking style  
+`rapid-blink` - set rapid blinking style  
 `inverse` - set inverse style  
 `hidden` - set hidden style  
-`strike` - set strikeout style
+`strikeout` - set strikeout style
 
 ---
 
 ### ANSI [cursor]
-terminal control (accepts endless arguments)
+terminal control (accepts countless arguments)
 ```bash
 cursor '<position>' '<erase>'
 ```
@@ -115,8 +117,8 @@ cursor '<position>' '<erase>'
 `down` - move down # rows  
 `right` - move right # columns  
 `left` - move left # columns  
-`down:start` - move down to beginning of row #  
-`up:start` - move up to beginning of row #  
+`down:beg` - move down to beginning of row #  
+`up:beg` - move up to beginning of row #  
 `col` - move cursor to column #   
 `up:scroll` - move up 1 row & scroll  
 `save` - save cursor position  
@@ -131,7 +133,7 @@ cursor '<position>' '<erase>'
 `?screen` - erase entire screen  
 `?row:saved` - erase saved row  
 `?row:end` - erase from cursor to end of row  
-`?row:start` - erase start of row to cursor  
+`?row:beg` - erase start of row to cursor  
 `?row` - erase the entire row
 
 ---
@@ -163,7 +165,7 @@ regex '<string>' <pattern>
 ### [truncate]
 trim all excess whitespace
 ```bash
-truncate '  <string> '
+truncate '  <string>  '
 ```
 
 ### [trim]
@@ -200,8 +202,8 @@ tail <N> <file>
 
 ---
 
-### [rows]
-get a row count from a specified file
+### [lines]
+get a line count from a specified file
 ```bash
 rows <file>
 ```
@@ -211,7 +213,7 @@ rows <file>
 ### [random]
 fetch a random element from string; variable or array
 ```bash
-random  "<array[@]>"
+random  <hi> <bye> <cya>
 ```
 
 ---

@@ -1,108 +1,91 @@
 #!/bin/bash
+# shellcheck disable=SC2102,SC2034
+# SC2102: ignore single char range
+# SC2034: enable unused variables
 
 set -a
 shopt -s extglob
 
-opt(){
-  local opt
-  declare -gA opts
-  for opt in $1 ; do 
-    opts[$opt]="$2"
+type(){ # set dictionaries by multiple keys; like enums
+  declare -gA types
+
+  IFS=','
+  for _ in $1 ; do
+    key="${_//[][]}"
+    shift
+    types["$key"]="$2"
   done
 }
 
 ## ANSI
+# get current terminal position
 cur_pos(){ IFS='[;' read -p $'\e[6n' -d R -rs _ row col ;}
 
-term_size(){
+term_size(){ # get terminal window size
   IFS='[;' read -sp $'\e[9999;9999H\e[6n' -d R -rs _ rows cols
 }
 
+# trap window resizes
 trap_resize(){ trap 'cur_pos' WINCH ;}
 
-wipe_term() { printf '\e[H\e[2J' ;}
+# wipe terminal screen
+clear() { printf '\e[H\e[2J' ;}
 
-cursor(){
-  opt 'on show' 25h # show cursor
-  opt 'off hide' 25l # hide cursor
+cursor(){ # position cursor or erase terminal content
+  type [on,off] = 25h 25l
+  type [up,down,right,left] = A B C D
+  type [down-beg,up-beg,up-scroll] = E F M
+  type [col, pos] = G H
+  type [save,restore] = 7 8
   
-  opt 'up' A # up (N) rows
-  opt 'down' B # down (N) rows
-  opt 'right' C # right (N) cols
-  opt 'left' D # left (N) cols
-  opt 'down-start' E # down (N) rows at start
-  opt 'up-start' F # up (N) rows at start
-  opt 'col' G # move to col (N)
-  
-  opt 'home pos position' H # move to row (N), col (N)
-
-  opt 'up-scroll' M # move up row & scroll
-  opt 'save' 7 # save position
-  opt 'restore' 8 # restore position
-
-  # erase
-  opt '?screen:end' J # from cursor to screen end
-  opt '?screen:start' 1J # from cursor to screen start
-  opt '?screen' 2J # entire screen
-  opt '?row:saved' 3J # saved row
-
-  opt '?row:end' K # from cursor to row end
-  opt '?row:start' 1K # from cursor to row start
-  opt '?row' 2K # entire row
+  type [?screen:end,?screen:beg,?screen] = J 1J 2J
+  type [?row:saved,?row:end,?row:beg,?row] =\
+    3J K 1K 2K
 
   local n opt vt100
   for _ ; do
     if [[ $_ =~ [a-z]+:[0-9]+ ]]; then
       opt="${_%%:*}" n="${_/$opt:}"
-      [[ ${opts[$opt]} ]]&& vt100+=("\e[${n/:/;}${opts[$opt]}")
+      [[ ${types[$opt]} ]]&& vt100+=("\e[${n/:/;}${types[$opt]}")
     else
-      [[ ${opts[$_]} ]]&& vt100+=("\e[${opts[$_]}")
+      [[ ${types[$_]} ]]&& vt100+=("\e[${types[$_]}")
     fi
   done
+
+  n="${vt100//[]}"
   shift ${#vt100[@]}
   printf '%b' "${vt100[*]}" "$*"
 }
 
-style(){
-  opt 'black' 0 # black
-  opt 'red' 1 # red
-  opt 'green' 2 # green
-  opt 'yellow' 3 # yellow
-  opt 'blue' 4 # blue
-  opt 'purple' 5 # purple
-  opt 'cyan' 6 # cyan
-  opt 'white' 7 # white
+style(){ # decorate text
+  type [fg,bg] = 3 4
+  type [black,white] = 0 7
+  type [red,green,yellow] = 1 2 3
+  type [blue,purple,cyan] = 4 5 6
 
-  opt 'bold' 1 # bold
-  opt 'dim' 2 # dim
-  opt 'italic' 3 # italic
-  opt 'underline' 4 # underline
-  opt 'blink' 5 # blink
-  opt 'rapid-blink blink-fast' 6 # rapid blink
-  opt 'inverse reverse' 7 # inverse
-  opt 'hidden' 8 # hidden
-  opt 'strike strikeout' 9 # strikeout
-
-  opts[fg]=3
-  opts[bg]=4
+  type [bold,italic,underline,strikeout] =\
+    1 3 4 9
+  type [dim,blink,rapid-blink,inverse,hidden] =\
+    2 5 6 7 8
 
   local g opt sgr
   for _ ; do
-    if [[ $_ =~ fg|bg ]]; then
-      opt="${_#*-}" g="${opts[$BASH_REMATCH]}"
-      [[ ${opts[$opt]} ]] && sgr+=("${g}${opts[$opt]}")
+    if [[ $_ =~ ^[bf]g ]]; then
+      opt="${_#*-}" g="${types[${BASH_REMATCH[0]}]}"
+      [[ ${types[$opt]} ]] && sgr+="${g}${types[$opt]};"
     else
-      [[ ${opts[$_]} ]]&& sgr+=("${opts[$_]}")
+      [[ ${types[$_]} ]]&& sgr+="${types[$_]};"
     fi
   done
 
-  shift "${#sgr[@]}"
-  sgr="${sgr[*]}" sgr="\e[${sgr// /;}m${*}\e[m\n"
-  
+  n="${sgr//[^;]}"
+  shift "${#n}"
+  sgr="\e[${sgr// /;}m${*}\e[m\n"
+
   printf '%b' "$sgr"
 }
 
-rainbow(){
+rainbow(){ # colorize text
   local char color colors
   while read -rN1 char; do
     ((++color))
@@ -112,18 +95,17 @@ rainbow(){
     colors+="\e[1;3${color}m${char}"
   done <<<"$@"
   
-  colors="$colors\e[m\n"
-  printf '%b' "${colors/$'\n'}"
+  printf '%b' "${colors/$'\n'}\e[m\n"
 }
 
 ## String Manipulation
-regex() {
+regex() { # match a regex
   for _ in $1; do
-    [[ $_ =~ $2 ]] && echo $BASH_REMATCH
+    [[ $_ =~ $2 ]] && printf '%s\n' "${BASH_REMATCH[0]}"
   done
 }
 
-truncate() {
+truncate() { # destroy unecessary whitespsace
   local string
   for _ in $1; do
     string+=" $_"
@@ -131,15 +113,15 @@ truncate() {
   printf '%s\n' "${string## }"
 }
 
-trim(){
+trim(){ # cut a substring from string
   printf '%s\n' "${1/$2}"
 }
 
-trim_all(){
+trim_all(){ # cut all occurences of substring from string
   printf '%s\n' "${1//$2}"
 }
 
-split(){
+split(){ # string delimiter
   local string
   IFS="$2" 
   for _ in $1 ; do
@@ -147,34 +129,34 @@ split(){
   done
 }
 
-head(){
+head(){ # gets first N rows from file; replaces head
   local y
   mapfile -tn "$1" y < "$2"
   printf '%s\n' "${y[@]}"
 }
 
-tail(){
+tail(){ # get last N rows from file; replaces tail
   local y
   mapfile -tn 0 y < "$2"
   printf '%s\n' "${y[@]: -$1}"
 }
 
-lines() {
+lines() { # count lines; replaces wc -l
   local y
   mapfile -tn 0 y < "$1"
   printf '%s\n' "${#y[@]}"
 }
 
-random() {
+random() { # get random element from string
   local rand
-  for _ in $@ ; do
+  for _ ; do
     rand+=("$_")
   done
 
   printf '%s\n' "${rand[RANDOM%${#rand[@]}]}"
 }
 
-unique() {
+unique() { # get unique elements from two strings
   local uniq
   for _ in $1; do
     [[ $2 =~ $_ ]]|| uniq+=("$_")
@@ -188,6 +170,6 @@ unique() {
 }
 
 ## Arithmetic
-math() {
-  "$PWD/arithmetic" < <(echo "$@")
+math() { # do advanced arithmetic in precedence from C
+  "$PWD/arithmetic" < <(printf '%s\n' "$@")
 }
