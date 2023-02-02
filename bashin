@@ -1,0 +1,28 @@
+#!/bin/bash
+# shellcheck disable=SC1090
+# SC1090 -- ShellCheck can't follow non-const... that's unfortunate
+
+set -a
+shopt -s expand_aliases
+
+unset path
+[[ ${PWD##*/} == 'bashin' ]]|| path="${BASH_SOURCE[*]%/*}"
+
+import(){
+  unset lib proc
+  for _; do
+    [[ $_ =~ / ]]&&{ lib="${_%/*}" proc="${_#*/}"; }|| proc="$_"
+
+    . "${path:-.}"/lib/"${lib-}"*/"${proc%.sh}.sh"
+  done
+}
+
+import_all(){
+  for _ in "${path:-.}"/lib/{core,sys,std}/*.sh; do
+    . "$_"
+  done
+}
+
+import core/{types,arithmetic}
+
+alias lc=line_count
