@@ -18,11 +18,11 @@ import(){
 }
 
 import_all(){
-  for _ in "${path:-.}"/lib/{core,sys,std}/*.sh; do
+  for _ in "${path:-.}"/lib/{sys,std}/*.sh; do
     . "$_"
   done
 }
 
-import core/{types,arithmetic}
+import core/math
 
 alias lc=line_count

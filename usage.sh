@@ -9,7 +9,7 @@ import std/{ansi,tui,strings}
 # or import_all to import every library
 # -------------------------------------------------------
 
-# < core/arithmetic > #
+# < core/math > #
 #do arithmetic in pemdas precedence (floating point)
 math '5+2-(3%2)/8.2'
 # -------------------------------------------------------
