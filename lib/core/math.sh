@@ -2,5 +2,5 @@
 
 ## Arithmetic
 math() { # do advanced arithmetic in precedence from C
-  "$PWD/lib/core/arithmetic" < <(printf '%s\n' "$*")
+  "${PWD}"/lib/core/arithmetic < <(echo "$@")
 }

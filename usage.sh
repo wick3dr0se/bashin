@@ -5,7 +5,7 @@
 
 # import specific libraries (scripts)
 import sys/files
-import std/{ansi,tui,strings}
+import std/{ansi,time,tui,strings}
 # or import_all to import every library
 # -------------------------------------------------------
 
@@ -15,11 +15,11 @@ math '5+2-(3%2)/8.2'
 # -------------------------------------------------------
 
 # < std/ansi > #
-# clear screen, move up 10 cells & print hello
-vt ?screen right:10 'VT100 ANSI esacpes'
+# clear screen, move cursor to position 1y,9x & print
+vt buffer:alt pos:1:9 'VT100 ANSI esacpes'
 
-# rainbow colorize text
-rainbow 'ANSI'
+# rainbow-like colorize text
+colorize 'SGR 4-bit cycle'
 
 # decorate text with a dim green black background/foreground
 sgr dim bg:green fg:black 'Select Graphic Rendition'
@@ -59,6 +59,13 @@ reverse_array "${arr[@]}"
 echo "${REVERSE[@]} - Reversed array"
 # -------------------------------------------------------
 
+# < std/time > #
+# pause for ~3 seconds
+printf 'Pausing for ~3 seconds...'
+pause 3
+vt ?row up # just to clear the line and move back up
+# -------------------------------------------------------
+
 # < std/tui > #
 # read terminal cells to $LINES/$COLUMNS env respectively
 term_size
@@ -74,7 +81,7 @@ for((;;)){
   read_keys
 
   case ${KEY^^} in
-    Q) break;;
+    Q) printf 'Q\n'&& break;;
     [A-Z]) continue;;
     \[*) printf "$KEY ";;
   esac
@@ -83,13 +90,15 @@ for((;;)){
 
 # < sys/files > #
 # print 1 line from the beginning of file
-top_lines 1 usage.sh
+head_lines 1 usage.sh
 echo "First line - usage.sh: $HEAD"
 
 # print 1 line from the end of file
-bot_lines 1 usage.sh
+tail_lines 1 usage.sh
 echo "Last line - usage.sh: $TAIL"
 
 # get a file line count
 lc usage.sh
 echo "Line Count - usage.sh: $LINE_COUNT"
+
+vt buffer:main # back to main buffer

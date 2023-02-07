@@ -73,6 +73,18 @@ vt '<erase>' '<position>'
 ---
 </details>
 
+<details open><summary><h1>:watch: Time</h1></summary>
+
+A collection of time-related procedures
+
+### Pause
+Pauses a scripts execution for approximately N seconds
+```bash
+pause <N>
+```
+
+</details>
+
 <details open><summary><h1>:magic_wand: Terminal User Interface</h1></summary>
 
 A library of TUI procedures

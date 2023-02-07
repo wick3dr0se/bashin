@@ -6,8 +6,10 @@ set -a
 shopt -s expand_aliases
 
 unset path
+# set absolute directory
 [[ ${PWD##*/} == 'bashin' ]]|| path="${BASH_SOURCE[*]%/*}"
 
+# source libraries (scripts)
 import(){
   unset lib proc
   for _; do
@@ -17,12 +19,15 @@ import(){
   done
 }
 
+# source all libraries
 import_all(){
   for _ in "${path:-.}"/lib/{sys,std}/*.sh; do
     . "$_"
   done
 }
 
+# importing the core libs
 import core/math
 
+# defining more practical command names
 alias lc=line_count

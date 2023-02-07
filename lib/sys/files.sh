@@ -1,5 +1,11 @@
 #!/bin/bash
 
+mkfile(){ # create files
+  for _; do
+    >"$_"
+  done
+}
+
 head_lines(){ # gets first N rows from file; replaces head command
   mapfile -tn "$1" < "$2"
 

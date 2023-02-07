@@ -15,7 +15,11 @@ vt(){ # virtual terminal // control the terminal
   )
 
   for _; do
-    if [[ $_ =~ [a-z]:[0-9] ]]; then
+    if [[ $_ =~ [a-z]:[0-9]:[0-9] ]]; then
+      local opt="${_%%:*}" n="${_#*:}"
+
+      printf '\e[%s%s' "${n/:/;}" "${vt100[$opt]}"
+    elif [[ $_ =~ [a-z]:[0-9] ]]; then
       printf '\e[%d%s' "${_##*:}" "${vt100[${_%:*}]}"
     elif [[ ${vt100[$_]} ]]; then
       printf '\e[%s' "${vt100[$_]}" 
@@ -60,9 +64,10 @@ sgr(){ # select graphic rendition // decorate text
   printf '%s\e[m\n' "${sgr[*]}"
 }
 
-clear_term(){ printf '\e[2J\e[H'; }
+# wipe terminal screen
+wipe_term(){ printf '\e[2J\e[H'; }
 
-rainbow(){ # colorize text
+colorize(){ # colorize text
   local char color colors
   while read -rN1 c; do
     ((++color))
