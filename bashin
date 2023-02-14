@@ -7,7 +7,7 @@ shopt -s expand_aliases
 
 unset path
 # set absolute directory
-[[ ${PWD##*/} == 'bashin' ]]|| path="${BASH_SOURCE[*]%/*}"
+path="${BASH_SOURCE[0]%bashin}"
 
 # source libraries (scripts)
 import(){
@@ -27,7 +27,7 @@ import_all(){
 }
 
 # importing the core libs
-import core/math
+import core/{loops,math}
 
 # defining more practical command names
 alias lc=line_count

@@ -54,11 +54,64 @@ echo "$LINE_COUNT"
 
 A library of BASH alternatives to common Linux system commands
 
+Many bashin procedures are re-mapped to their counterpart system commands
+
+*Requires corresponding libs to be imported*
+
+### Return
+Allow builtin return to accept an alphabetic argument outside of functions, on top of handling exit codes
+
+```bash
+# return an exit code
+return <{0..255}>
+# return a string
+return '<string>'
+```
+
+### Clear Terminal
+Clear the terminal screen; An alternative to the clear command written in ANSI escape sequences
+
+Wraps wipe_term from std/ansi
+```bash
+clear
+```
+
+---
+
+### Sleep
+Pause script execution for approximately N seconds. Alternative to sleep command using BASH microsleeps
+
+Wraps pause from std/time
+```bash
+sleep <N>
+```
+
+---
+
 ### Create file
-```touch
+Create an empty file. An alternative to the touch command in pure BASH
+
+Wraps mkfile from sys/files
+```bash
 touch <filePath>
 ```
 
 ---
 
-Many bashin procedures are re-mapped to their counterpart system commands
+### Head
+Output first N lines of a file. An alternative to the head command written in pure BASH
+
+Wraps head_lines from sys/files
+```bash
+head <N> <filePath>
+```
+
+### Tail
+Output last N lines of a file. An alternative to the tail command in pure BASH
+
+Wraps tail_lines from sys/files
+```bash
+tail <N> <filePath>
+```
+
+---

@@ -1,9 +1,21 @@
-<details open><summary><h1>:heavy_division_sign: Floating Point Arithmetic</h1></summary>
+<details open><summary><h1>:infinity: Loops</h1></summary>
+
+A library of very useful loop helper procedures
+
+### Skip
+Skip N or 1 loop iterations
+```bash
+skip <N>
+```
+---
+</details>
+
+<details open><summary><h1>:heavy_division_sign: Math</h1></summary>
 
 A math library, written in C, capabale of handling advanced floating point arithmetic in precedence
 
-### Math
-Do floating point arithmetic
+### Arithmetic
+Evaluate a mathematical equation
 ```bash
 math <equation>
 ```

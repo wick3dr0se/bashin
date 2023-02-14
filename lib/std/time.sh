@@ -2,6 +2,16 @@
 
 shopt -s extglob
 
+clock(){
+  start="$EPOCHSECONDS"
+  "$@"
+  end="$EPOCHSECONDS"
+
+  ((CLOCK=end-start))
+
+  echo "$CLOCK"
+}
+
 pause(){
   local n
   case $1 in

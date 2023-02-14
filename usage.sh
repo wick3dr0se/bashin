@@ -4,9 +4,18 @@
 . bashin
 
 # import specific libraries (scripts)
-import sys/files
+import sys/{bashist,files}
 import std/{ansi,time,tui,strings}
 # or import_all to import every library
+# -------------------------------------------------------
+
+wipe_term # just to clear the screen
+
+# < core/loops > #
+for i in {1..3}; do
+  skip 2&& i+=' Skipped 2 iterations'
+  echo "$i"
+done
 # -------------------------------------------------------
 
 # < core/math > #
@@ -15,8 +24,8 @@ math '5+2-(3%2)/8.2'
 # -------------------------------------------------------
 
 # < std/ansi > #
-# clear screen, move cursor to position 1y,9x & print
-vt buffer:alt pos:1:9 'VT100 ANSI esacpes'
+# switch to main buffer, move cursor to position 1y,9x & print
+vt right:9 'VT100 ANSI esacpes'
 
 # rainbow-like colorize text
 colorize 'SGR 4-bit cycle'
@@ -60,9 +69,12 @@ echo "${REVERSE[@]} - Reversed array"
 # -------------------------------------------------------
 
 # < std/time > #
+# time a commands execution
+printf 'Took ~'; clock sleep 1
+
 # pause for ~3 seconds
-printf 'Pausing for ~3 seconds...'
-pause 3
+printf 'Pausing for a couple seconds...'
+pause 2
 vt ?row up # just to clear the line and move back up
 # -------------------------------------------------------
 
@@ -88,6 +100,11 @@ for((;;)){
 }
 # -------------------------------------------------------
 
+# < sys/bashist > #
+# return wrapper that allows a-z values outside of loops
+return 'hello'
+# -------------------------------------------------------
+
 # < sys/files > #
 # print 1 line from the beginning of file
 head_lines 1 usage.sh
@@ -100,5 +117,3 @@ echo "Last line - usage.sh: $TAIL"
 # get a file line count
 lc usage.sh
 echo "Line Count - usage.sh: $LINE_COUNT"
-
-vt buffer:main # back to main buffer
