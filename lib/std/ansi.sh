@@ -28,7 +28,8 @@ vt(){ # virtual terminal // control the terminal
     fi
   done
 
-  printf '%s\n' "${vt[*]}"
+  printf '%s' "${vt[*]}"
+  [[ $vt == '' ]]|| printf '\n'
 }
 
 sgr(){ # select graphic rendition // decorate text

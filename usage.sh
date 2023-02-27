@@ -79,8 +79,7 @@ vt ?row up # just to clear the line and move back up
 # -------------------------------------------------------
 
 # < std/tui > #
-# read terminal cells to $LINES/$COLUMNS env respectively
-term_size
+# read terminal cells to $LINES/$COLUMNS env respectively (implicit)
 echo "$LINES $COLUMNS - Terminal row & column cells"
 
 # get current terminal cursor position
@@ -101,8 +100,6 @@ for((;;)){
 # -------------------------------------------------------
 
 # < sys/bashist > #
-# return wrapper that allows a-z values outside of loops
-return 'hello'
 # -------------------------------------------------------
 
 # < sys/files > #
