@@ -58,16 +58,6 @@ Many bashin procedures are re-mapped to their counterpart system commands
 
 *Requires corresponding libs to be imported*
 
-### Return
-Allow builtin return to accept an alphabetic argument outside of functions, on top of handling exit codes
-
-```bash
-# return an exit code
-return <{0..255}>
-# return a string
-return '<string>'
-```
-
 ### Clear Terminal
 Clear the terminal screen; An alternative to the clear command written in ANSI escape sequences
 
