@@ -104,10 +104,7 @@ echo "$LINE $COLUMN"
 ---
 
 ### Terminal Dimensions
-Fetches terminal window cells
-```bash
-term_size
-```
+Fetches terminal window cells (implicit)
 
 Example:
 ```bash
