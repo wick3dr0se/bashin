@@ -75,7 +75,7 @@ printf 'Took ~'; clock sleep 1
 # pause for ~3 seconds
 printf 'Pausing for a couple seconds...'
 pause 2
-vt ?row up # just to clear the line and move back up
+vt ?row col:1 # just to clear the line and move back up
 # -------------------------------------------------------
 
 # < std/tui > #

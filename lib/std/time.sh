@@ -9,7 +9,7 @@ clock(){
 
   ((CLOCK=end-start))
 
-  echo "$CLOCK"
+  printf '%s\n' "$CLOCK"
 }
 
 pause(){
@@ -19,7 +19,7 @@ pause(){
     ?([0-9]).[1-9][0-9]) n=${1/.} n="${n%[0-9]}9999";;
     ?([0-9]).[1-9]) n="${1/0.}" n="${n/.}999";;
     [1-9]?([0-9])) n="${1}9999";;
-    *) echo 'Unsupported value'&& exit 1;;
+    *) printf '%s\n' 'Unsupported value'&& exit 1;;
   esac
   shift
 
