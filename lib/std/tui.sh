@@ -15,3 +15,16 @@ read_keys(){ # read keyboard input, including control sequences
   [[ $REPLY == $'\e' ]]&& read -rsn2
   KEY="${REPLY-}"
 }
+
+infinite_boundries(){
+  local -n _y="$1" _x="$2"
+  if (( _y == 0 )) ; then
+    _y="$LINES"
+  elif (( x == 0 )); then
+    _x="$COLUMNS"
+  elif (( _y > LINES )); then
+    _y=1
+  elif (( _x > COLUMNS )); then
+    _x=1
+  fi
+}

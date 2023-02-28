@@ -83,6 +83,7 @@ Pauses a scripts execution for approximately N seconds
 pause <N>
 ```
 
+---
 </details>
 
 <details open><summary><h1>:magic_wand: Terminal User Interface</h1></summary>
@@ -125,6 +126,14 @@ Example:
 echo "$KEY"
 ```
 > [A
+
+---
+
+### Infinite Boundries
+Utilizing namerefs, at end of screen convert y and x coordinate respectively to their opposite side
+```bash
+infinite_boundries <LINE> <COLUMN>
+```
 
 ---
 </details>
