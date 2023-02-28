@@ -20,7 +20,7 @@ infinite_boundries(){
   local -n _y="$1" _x="$2"
   if (( _y == 0 )) ; then
     _y="$LINES"
-  elif (( x == 0 )); then
+  elif (( _x == 0 )); then
     _x="$COLUMNS"
   elif (( _y > LINES )); then
     _y=1
