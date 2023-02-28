@@ -97,6 +97,9 @@ for((;;)){
     \[*) printf "$KEY ";;
   esac
 }
+
+# make boundries infinite by sending cursor to opposite end of screen
+#infinite_boundries Y X # works by nameref settings Y & X var respectively
 # -------------------------------------------------------
 
 # < sys/bashist > #
