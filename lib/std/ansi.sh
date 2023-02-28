@@ -6,6 +6,7 @@ vt(){ # virtual terminal // control the terminal
   local -A vt100=(
     [buffer:main]='?1049l'  [buffer:alt]='?1049h'
     [cursor:show]='?25h'  [cursor:hide]='?25l'
+    [line:wrap]='?7l'  [line:break]='?7h'
     [up]=A  [down]=B  [right]=C  [left]=D
     [down:beg]=E  [up:beg]=F  [up:scroll]=M
     [col]=G  [pos]=H  [save]=7  [restore]=8
@@ -29,7 +30,7 @@ vt(){ # virtual terminal // control the terminal
   done
 
   printf '%s' "${vt[*]}"
-  [[ $vt == '' ]]|| printf '\n'
+  [[ ${vt-} == '' ]]|| printf '\n'
 }
 
 sgr(){ # select graphic rendition // decorate text
