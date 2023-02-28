@@ -22,7 +22,7 @@ vt(){ # virtual terminal // control the terminal
       printf '\e[%s%s' "${n/:/;}" "${vt100[$opt]}"
     elif [[ $_ =~ [a-z]:[0-9] ]]; then
       printf '\e[%d%s' "${_##*:}" "${vt100[${_%:*}]}"
-    elif [[ ${vt100[$_]} ]]; then
+    elif [[ ${vt100[$_]-} ]]; then
       printf '\e[%s' "${vt100[$_]}" 
     else
       vt+=("$_")
@@ -52,11 +52,11 @@ sgr(){ # select graphic rendition // decorate text
   )
 
   for _; do
-    if [[ ${colors[${_#*:}]}&& $_ =~ ^[fb]g: ]]; then
+    if [[ ${colors[${_#*:}]-}&& $_ =~ ^[fb]g: ]]; then
       printf '\e[%d%dm' "${colors[${_%%:*}]}" "${colors[${_#*:}]}"
-    elif [[ ${colors[$_]} ]]; then
+    elif [[ ${colors[$_]-} ]]; then
       printf '\e[3%dm' "${colors[$_]}"
-    elif [[ ${modes[$_]} ]]; then
+    elif [[ ${modes[$_]-} ]]; then
       printf '\e[%dm' "${modes[$_]}"
     else
       sgr+=("$_")
@@ -70,14 +70,13 @@ sgr(){ # select graphic rendition // decorate text
 wipe_term(){ printf '\e[2J\e[H'; }
 
 colorize(){ # colorize text
-  local char color colors
-  while read -rN1 c; do
-    ((++color))
+  color=1
+  while read -rn1; do
+    [[ $REPLY == ' ' ]]&& ((color--))
+    printf '\e[3%dm%s\e[m' "$color" "$REPLY"
+    ((color++))
     (( color == 7 ))&& color=1
-    [[ $c == ' ' ]]&& ((color--))
+  done <<< "$*"
 
-    colors+="\e[1;3${color}m$c"
-  done <<< "$@"
-
-  printf '%b' "${colors/$'\n'}\e[m\n"
+  [[ $* == '' ]]|| printf '\n'
 }
