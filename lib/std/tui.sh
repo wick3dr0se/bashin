@@ -1,8 +1,8 @@
 #!/bin/bash
 # Terminal User Interface
 
-# update $LINE/$COLUMN from window resizes
-trap term_size 28
+# update $LINES & $COLUMNS from window resizes
+trap 'shopt -s checkwinsize; (:;:)' 28
 
 # get terminal window size $LINES/$COLUMNS
 shopt -s checkwinsize; (:;:)
