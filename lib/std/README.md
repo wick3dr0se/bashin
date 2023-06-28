@@ -77,10 +77,10 @@ vt '<erase>' '<position>'
 
 A collection of time-related procedures
 
-### Pause
-Pauses a scripts execution for approximately N seconds
+### Clock
+Times a commands execution
 ```bash
-pause <N>
+clock <command>
 ```
 
 ---

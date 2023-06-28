@@ -1,7 +1,7 @@
 #!/bin/bash
 ## String Manipulation
 
-regex() { # match a regex
+regex(){ # match a regex
   for _ in $1; do
     [[ $_ =~ $2 ]]&& REGEX="${BASH_REMATCH[0]}"
   done
@@ -23,7 +23,7 @@ delim(){ # string delimiter
   unset IFS
 }
 
-rand() { # get random element from string
+rand(){ # get random element from string
   local foo
   for _ in $1; do
     foo+=("$_")
@@ -32,7 +32,7 @@ rand() { # get random element from string
   RAND="${foo[SRANDOM%${#foo[@]}]}"
 }
 
-unique() { # get unique elements from two strings
+unique(){ # get unique elements from two strings
   local foo
   for _ in $1; do
     [[ $2 =~ $_ ]]|| foo+=("$_")
