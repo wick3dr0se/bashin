@@ -128,14 +128,6 @@ echo "$KEY"
 > [A
 
 ---
-
-### Infinite Boundries
-Utilizing namerefs, at end of screen convert y and x coordinate respectively to their opposite side
-```bash
-infinite_boundries <LINE> <COLUMN>
-```
-
----
 </details>
 
 <details open><summary><h1>:sewing_needle: String Manipulation</h1></summary>

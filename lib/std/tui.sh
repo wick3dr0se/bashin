@@ -1,13 +1,12 @@
 #!/bin/bash
 # Terminal User Interface
 
-# update $LINES & $COLUMNS from window resizes
-trap 'shopt -s checkwinsize; (:;:)' 28
-
 # get terminal window size $LINES/$COLUMNS
-shopt -s checkwinsize; (:;:)
+term_size(){
+  shopt -s checkwinsize; (:;:)
+}
 
-# get current terminal position
+# get current terminal position $LINE/$COLUMN
 cur_pos(){ IFS='[;' read -p $'\e[6n' -d R -rs _ LINE COLUMN _; }
 
 read_keys(){ # read keyboard input, including control sequences
@@ -16,15 +15,7 @@ read_keys(){ # read keyboard input, including control sequences
   KEY="${REPLY-}"
 }
 
-infinite_boundries(){
-  local -n _y="$1" _x="$2"
-  if (( _y == 0 )) ; then
-    _y="$LINES"
-  elif (( _x == 0 )); then
-    _x="$COLUMNS"
-  elif (( _y > LINES )); then
-    _y=1
-  elif (( _x > COLUMNS )); then
-    _x=1
-  fi
-}
+# update $LINES & $COLUMNS from window resizes
+trap term_size 28
+
+term_size
