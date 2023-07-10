@@ -37,3 +37,34 @@ math 2.2+5
 
 ---
 </details>
+
+<details open><summary><h1>:bookmark_tabs: Stacks</h1></summary>
+
+### Push
+Push element(s) on top of the stack
+```bash
+push <element>
+```
+
+### Pop
+Pop element(s) from stack
+```bash
+pop <element_index>
+```
+
+*Executing `pop` without arguments will pop the first element from the stack`
+
+### Stack
+View stack information
+```bash
+stack <option>
+```
+
+#### Options
+```
+empty,-e,--empty  ...  Empty the stack
+reverse,-r,--reverse  ...  Reverse the stack
+```
+
+*Executing `stack` without arguments will output the entire stack with index and stack count*
+</details>
