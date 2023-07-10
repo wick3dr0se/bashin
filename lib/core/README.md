@@ -54,6 +54,14 @@ pop <element_index>
 
 *Executing `pop` without arguments will pop the first element from the stack`
 
+### Peek
+Show element(s) in stack
+```bash
+peek <element_index>
+```
+
+*Executing `peek` without arguments will show the first element in the stack*
+
 ### Stack
 View stack information
 ```bash
