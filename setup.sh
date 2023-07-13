@@ -3,7 +3,7 @@
 # Check for the $BASHIN env before program execution, execute this setup script accordingly
 
 (( BASHIN ))&&{
-  printf 'Bashin found!'
+  printf 'Bashin already exist on system!\n'
   exit
 }
 
