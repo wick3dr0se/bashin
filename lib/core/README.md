@@ -47,7 +47,7 @@ push <element>
 ```
 
 ### Pop
-Pop element(s) from stack
+Pop element(s) from stack, storing them to the $POPPED builtin
 ```bash
 pop <element_index>
 ```
@@ -75,4 +75,12 @@ reverse,-r,--reverse  ...  Reverse the stack
 ```
 
 *Executing `stack` without arguments will output the entire stack with index and stack count*
+
+### Cycle
+Cycle the stack (shifting N elements)
+```bash
+cycle <N>
+```
+
+*Cycle backwards by specifying a negative integer*
 </details>

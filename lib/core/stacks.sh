@@ -65,16 +65,24 @@ push(){
   STACK=("$@" "${oldStack[@]}")
 }
 
+put(){ STACK+=("$@"); }
+
 pop(){
+  local arg
+
   if (( ${#STACK[@]} == 0 )); then
     printf 'Stack is empty!\n'
     return 1
   elif (( $# )); then
-    for _; do
-      if (( $_ <= ${#STACK[@]}-1 )); then
-        unset "STACK[$_]"
+    for arg; do
+      if [[ $arg =~ ^:([0-9])+$ ]]; then
+        POPPED=("${STACK[@]:0:${arg#:}}")
+        STACK=("${STACK[@]:${arg#:}}")
+      elif (( $arg <= ${#STACK[@]}-1 )); then
+        POPPED="${STACK[$arg]}"
+        unset "STACK[$arg]"
       else
-        printf 'Element %d not accessible!\n' "$_"
+        printf 'Element %d not accessible!\n' "$arg"
 
         return 1
       fi
@@ -82,6 +90,18 @@ pop(){
     
     STACK=("${STACK[@]}")
   else
+    POPPED="${STACK[0]}"
     STACK=("${STACK[@]:1}")
+  fi
+}
+
+cycle(){
+  local n="${1:-1}"
+  if [[ $1 =~ ^- ]]; then
+    local popped=("${STACK[@]:(-${n#-})}")
+    STACK=("${popped[@]}" "${STACK[@]::${#STACK[@]}-${n#-}}")
+  else
+    local popped=("${STACK[@]:0:$n}")
+    STACK=("${STACK[@]:$n}" "${popped[@]}")
   fi
 }

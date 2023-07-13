@@ -9,6 +9,8 @@ unset path
 # set absolute directory
 path="${BASH_SOURCE[0]%bashin}"
 
+BASHIN=1
+
 # source libraries (scripts)
 import(){
   unset lib proc
@@ -27,7 +29,7 @@ import_all(){
 }
 
 # importing the core libs
-import core/{loops,math,stack}
+import core/{loops,math,stacks}
 
 # defining more practical command names
 alias lc=line_count
