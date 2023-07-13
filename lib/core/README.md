@@ -3,7 +3,7 @@
 A library of very useful loop helper procedures
 
 ### Skip
-Skip N or 1 loop iterations
+Skip N or 1 loop iterations. Iterations are stored to the $SKIP builtin
 ```bash
 skip <N>
 ```

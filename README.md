@@ -26,14 +26,24 @@ Bashin can be used to handle advanced arithmetic in precedence, e.g:
 
 Bashin handles ANSI escape sequences that make coloring, positioning and other terminal modifications much more simple (like building a TUI)
 
-# Setup
+# Auto Setup
+execute the setup.sh script (recommended)
 
+```bash
+bash <(curl -s https://raw.githubusercontent.com/wick3dr0se/bashin/main/setup.sh)
+```
+
+*the one-liner above will remotely execute the `bashin` setup script; useful for including `bashin`*
+
+## Manual Setup
 clone the repository
 ```bash
 git clone https://github.com/wick3dr0se/bashin&& cd "${_##*/}"
 ```
 
-source bashin within another script
+execute the setup.sh script `bash setup.sh`
+
+otherwise source bashin within another script:
 ```bash
 <path>/bashin
 # or

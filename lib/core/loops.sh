@@ -2,9 +2,9 @@
 
 # skip loop iterations
 skip(){
-  if (( ${N:=1} > ${1:-1} )); then
+  if (( ${SKIP:=1} > ${1:-1} )); then
     :
   else
-    ((N++)); false
+    ((SKIP++)); false
   fi
 }
