@@ -10,19 +10,33 @@
 <img src="https://discordapp.com/api/guilds/913584348937207839/widget.png?style=shield"/></a>
 </div>
 
-Bashin is an extension of BASH intended to be as minimal and clean as possible; Wrote in pure BASH with (floating point) arithmetic evaluation borrowed from C, bashin is super fast
+Bashin is an extension of BASH intended to be as minimal and clean as possible; Wrote in pure BASH, bashin is super fast
 
 Many scripters resort to slow external commands glued together with pipes and subshells. Of course they have their use cases but generally (for performance sake) they should be avoided
 
-Bashin can be used to handle advanced arithmetic in precedence, e.g:
+Bashin makes BASH shine in string manipulation, e.g:
 
 ```bash
-  math '5*(2+3)-8'
+arr=('a' 'b' 'c')
+
+reverse_array "${arr[@]}"
+
+echo "${REVERSE[@]}"
 ```
 
-> 17
+> c b a
 
-— Among many other things; Ran interactively or from within another script
+```bash
+arr1=('a' 'b' 'c') arr2=('a' 'c')
+
+unique "${arr1[*]}" "${arr2[*]}"
+
+echo "${UNIQUE[@]}"
+```
+
+> b
+
+— Among many other things; Bashin can be sourced interactively or per script
 
 Bashin handles ANSI escape sequences that make coloring, positioning and other terminal modifications much more simple (like building a TUI)
 
@@ -33,7 +47,7 @@ execute the setup.sh script (recommended)
 bash <(curl -s https://raw.githubusercontent.com/wick3dr0se/bashin/main/setup.sh)
 ```
 
-*the one-liner above will remotely execute the `bashin` setup script; useful for including `bashin`*
+*the one-liner above will remotely execute the `bashin` setup script - including `bashin`*
 
 ## Manual Setup
 clone the repository
