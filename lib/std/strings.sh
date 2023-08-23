@@ -33,16 +33,13 @@ rand(){ # get random element from string
 }
 
 unique(){ # get unique elements from two strings
-  local foo
   for _ in $1; do
-    [[ $2 =~ $_ ]]|| foo+=("$_")
+    [[ $2 =~ $_ ]]|| UNIQUE+=("$_")
   done
 
   for _ in $2; do
-    [[ $1 =~ $_ ]]|| foo+=("$_")
+    [[ $1 =~ $_ ]]|| UNIQUE+=("$_")
   done
-
-  UNIQUE="${foo[@]}"
 }
 
 reverse_string(){ # reverse a strings characters
