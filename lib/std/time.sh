@@ -3,9 +3,9 @@
 shopt -s extglob
 
 clock(){
-  start="$EPOCHSECONDS"
+  local start="$EPOCHSECONDS"
   "$@"
-  end="$EPOCHSECONDS"
+  local end="$EPOCHSECONDS"
 
   ((CLOCK=end-start))
 
