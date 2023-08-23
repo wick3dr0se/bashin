@@ -65,7 +65,7 @@ vt '<erase>' '<position>'
 `?screen:end` - erase from cursor to end of screen  
 `?screen:beg` - erase from beg of screen to cursor  
 `?screen` - erase entire screen  
-`?row:saved` - erase saved row  
+`?screen:buffer` - erase entire screen buffer  
 `?row:end` - erase from cursor to end of row  
 `?row:beg` - erase start of row to cursor  
 `?row` - erase the entire row

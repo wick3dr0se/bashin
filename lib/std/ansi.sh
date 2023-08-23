@@ -11,7 +11,7 @@ vt(){ # virtual terminal // control the terminal
     [down:beg]=E  [up:beg]=F  [up:scroll]=M
     [col]=G  [pos]=H  [save]=7  [restore]=8
 
-    [?screen:end]=J  [?screen:beg]='1J'  [?screen]='2J'  [?screen:saved]='3J'
+    [?screen:end]=J  [?screen:beg]='1J'  [?screen]='2J'  [?screen:buffer]='3J'
     [?row:end]=K  [?row:beg]='1K'  [?row]='2K'
   )
 
@@ -67,7 +67,7 @@ sgr(){ # select graphic rendition // decorate text
 }
 
 # wipe terminal screen
-wipe_term(){ printf '\e[2J\e[H'; }
+wipe_term(){ printf '\e[2J\e[3J\e[H'; }
 
 colorize(){ # colorize text
   color=1
