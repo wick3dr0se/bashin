@@ -10,9 +10,17 @@ term_size(){
 cur_pos(){ IFS='[;' read -p $'\e[6n' -d R -rs _ LINE COLUMN _; }
 
 read_keys(){ # read keyboard input, including control sequences
-  read -rsn1
-  [[ $REPLY == $'\e' ]]&& read -rsn2
-  KEY="${REPLY-}"
+  [[ $1 == 'mouse=on' ]]&&{
+    printf '\e[?1000h'
+  }
+
+  read -rsn1 KEY
+  [[ $KEY == $'\e' ]]&&{
+    read -rsn2 KEY
+    [[ $KEY == "[M" ]]&& { read -rsn3; KEY="$KEY$REPLY"; printf '\e[?1000l'; }
+  }
+  
+  [[ $KEY ]]&& :
 }
 
 # update $LINES & $COLUMNS from window resizes
