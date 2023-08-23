@@ -14,7 +14,9 @@ Bashin is an extension of BASH intended to be as minimal and clean as possible; 
 
 Many scripters resort to slow external commands glued together with pipes and subshells. Of course they have their use cases but generally (for performance sake) they should be avoided
 
-Bashin makes BASH shine in string manipulation, e.g:
+Bashin supports push, pop, cycling arrays and many more array/stack operations. Bashin handles ANSI escape sequences that make coloring, positioning and other terminal modifications much more simple (like building a TUI)
+
+BASH can *really* shine in string manipulation:
 
 ```bash
 arr=('a' 'b' 'c')
@@ -37,8 +39,6 @@ echo "${UNIQUE[@]}"
 > b
 
 — Among many other things; Bashin can be sourced interactively or per script
-
-Bashin handles ANSI escape sequences that make coloring, positioning and other terminal modifications much more simple (like building a TUI)
 
 # Auto Setup
 execute the setup.sh script (recommended)
