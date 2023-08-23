@@ -70,7 +70,7 @@ sgr(){ # select graphic rendition // decorate text
 wipe_term(){ printf '\e[2J\e[3J\e[H'; }
 
 colorize(){ # colorize text
-  color=1
+  local color=1
   while read -rn1; do
     [[ $REPLY == ' ' ]]&& ((color--))
     printf '\e[3%dm%s\e[m' "$color" "$REPLY"
