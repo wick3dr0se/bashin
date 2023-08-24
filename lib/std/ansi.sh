@@ -1,36 +1,65 @@
 #!/bin/bash
 
 ## ANSI
-vt(){ # virtual terminal // control the terminal
-  local vt
-  local -A vt100=(
-    [buffer:main]='?1049l'  [buffer:alt]='?1049h'
-    [cursor:show]='?25h'  [cursor:hide]='?25l'
-    [line:wrap]='?7l'  [line:break]='?7h'
-    [up]=A  [down]=B  [right]=C  [left]=D
-    [down:beg]=E  [up:beg]=F  [up:scroll]=M
-    [col]=G  [pos]=H  [save]=7  [restore]=8
+declare -gA buffer cursor erase move
 
-    [?screen:end]=J  [?screen:beg]='1J'  [?screen]='2J'  [?screen:buffer]='3J'
-    [?row:end]=K  [?row:beg]='1K'  [?row]='2K'
-  )
+buffer=( # virtual terminal // control the terminal
+  ['alt']='[?1049h'
+  ['main']='[?1049l'
+)
 
+cursor=(
+  ['hide']='[?25l'
+  ['show']='[?25h'
+  ['save']=7
+  ['restore']=8
+)
+
+erase=(
+  ['row']='[2K'
+  ['row-start']='[1K'
+  ['row-end']='[K'
+  ['screen']='[2J'
+  ['screen-start']='[1J'
+  ['screen-end']='[J'
+)
+
+move=(
+  ['up']=A
+  ['down']=B
+  ['right']=C
+  ['left']=D
+  ['down-start']=E
+  ['up-start']=F
+  ['col']=G
+  ['pos']=H
+  ['up-scroll']=S
+  ['down-scroll']=T
+)
+
+vt(){
   for _; do
-    if [[ $_ =~ [a-z]:[0-9]:[0-9] ]]; then
-      local opt="${_%%:*}" n="${_#*:}"
+    if [[ $_ == 'buffer:'*&& ${buffer[${_#buffer:}]?} ]]; then
+      seq+=("${buffer[${_#buffer:}]}")
+    elif [[ $_ == 'cursor:'*&& ${cursor[${_#cursor:}]?} ]]; then
+      seq+=("${cursor[${_#cursor:}]}")
+    elif [[ $_ == 'erase:'*&& ${erase[${_#erase:}]?} ]]; then
+      seq+=("${erase[${_#erase:}]}")
+    elif [[ $_ == 'move:'* ]]; then
+      [[ $_ =~ [0-9]$ ]]|| : "$_:1"; foo="${_#move:}"; : "${foo#*:}"
 
-      printf '\e[%s%s' "${n/:/;}" "${vt100[$opt]}"
-    elif [[ $_ =~ [a-z]:[0-9] ]]; then
-      printf '\e[%d%s' "${_##*:}" "${vt100[${_%:*}]}"
-    elif [[ ${vt100[$_]-} ]]; then
-      printf '\e[%s' "${vt100[$_]}" 
+      echo "${foo%%:*}"
+      [[ ${move[${foo%%:*}]?} ]]&&{
+        [[ $_ =~ [0-9]+:[0-9]+ ]]&&{ x="${_%:*}" y="${_#*:}"; : "$y;${x}"; }
+        seq+=("[$_${move[${foo%%:*}]}")
+      }
     else
-      vt+=("$_")
+      printf 'Invalid argument!'
+      return 1
     fi
   done
 
-  printf '%s' "${vt[*]}"
-  [[ ${vt-} == '' ]]|| printf '\n'
+  printf '\e%s' "${seq[@]}"
 }
 
 sgr(){ # select graphic rendition // decorate text
