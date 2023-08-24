@@ -38,6 +38,8 @@ move=(
 )
 
 vt(){
+  unset seq
+
   for _; do
     if [[ $_ == 'buffer:'*&& ${buffer[${_#buffer:}]?} ]]; then
       seq+=("${buffer[${_#buffer:}]}")
@@ -58,6 +60,7 @@ vt(){
     fi
   done
 
+  echo "${seq[@]}"
   printf '\e%s' "${seq[@]}"
 }
 

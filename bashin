@@ -17,13 +17,13 @@ import(){
   for _; do
     [[ $_ =~ / ]]&&{ lib="${_%/*}" proc="${_#*/}"; }|| proc="$_"
 
-    . "${path:-.}"/lib/"${lib-}"*/"${proc%.sh}.sh"
+    . "${path:-./}"lib/"${lib-}"*/"${proc%.sh}.sh"
   done
 }
 
 # source all libraries
 import_all(){
-  for _ in "${path:-.}"/lib/{sys,std}/*.sh; do
+  for _ in "${path:-./}"lib/{sys,std}/*.sh; do
     . "$_"
   done
 }
