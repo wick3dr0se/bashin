@@ -18,20 +18,16 @@ for i in {1..3}; do
 done
 # -------------------------------------------------------
 
-# < core/math > #
-#do arithmetic in pemdas precedence (floating point)
-math '5+2-(3%2)/8.2'
-# -------------------------------------------------------
-
 # < std/ansi > #
 # switch to main buffer, move cursor to position 1y,9x & print
-vt right:9 'VT100 ANSI esacpes'
+cursor_right 9
+echo 'VT100 ANSI escapes'
 
 # rainbow-like colorize text
 colorize 'SGR 4-bit cycle'
 
 # decorate text with a dim green black background/foreground
-sgr dim bg:green fg:black 'Select Graphic Rendition'
+sgr_writeline mode:dim bg:green fg:black 'Select Graphic Rendition'
 # -------------------------------------------------------
 
 # < std/strings > #
@@ -70,21 +66,19 @@ echo "${REVERSE[@]} - Reversed array"
 
 # < std/time > #
 # time a commands execution
-printf 'Took ~'; clock sleep 1
-
-# pause for ~3 seconds
-printf 'Pausing for a couple seconds...'
-pause 2
-vt ?row col:1 # just to clear the line and move back up
+clock sleep 1
+echo "Took $CLOCK seconds"
 # -------------------------------------------------------
 
 # < std/tui > #
 # read terminal cells to $LINES/$COLUMNS env respectively (implicit)
-echo "$LINES $COLUMNS - Terminal row & column cells"
+term_size
+echo "Total terminal rows: $ROWS"
+echo "Total terminal columns: $COLS"
 
 # get current terminal cursor position
-cur_pos
-echo "$LINE $COLUMN - Cursor position"
+get_cursor_pos
+echo "$ROW $COL - Cursor position"
 
 # read keyboard input; accepts control sequences
 printf 'Echoing control keys.. Press Q to quit: '
