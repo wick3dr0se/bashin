@@ -1,29 +1,20 @@
 #!/bin/bash
 # Terminal User Interface
 
-# get terminal window size $LINES/$COLUMNS
-term_size(){
-  shopt -s checkwinsize; (:;:)
+terminal_size(){ # outputs to $ROWS & $COLS
+  IFS='[;' read -sp $'\e7\e[999;999H\e[6n\e8' -d R -rs _ ROWS COLS
 }
 
-# get current terminal position $LINE/$COLUMN
-cur_pos(){ IFS='[;' read -p $'\e[6n' -d R -rs _ LINE COLUMN _; }
+get_cursor_position(){ # outputs to $ROW & $COL
+  IFS='[;' read -p $'\e[6n' -d R -rs _ ROW COL _
+}
 
-read_keys(){ # read keyboard input, including control sequences
-  [[ $1 == 'mouse=on' ]]&&{
-    printf '\e[?1000h'
-  }
-
+read_keys(){ # read keyboard/mouse input; outputs to $KEY
   read -rsn1 KEY
   [[ $KEY == $'\e' ]]&&{
     read -rsn2 KEY
-    [[ $KEY == "[M" ]]&& { read -rsn3; KEY="$KEY$REPLY"; printf '\e[?1000l'; }
+    [[ $KEY == "[M" ]]&& { read -rsn3; KEY="$KEY$REPLY"; }
   }
   
   [[ $KEY ]]&& :
 }
-
-# update $LINES & $COLUMNS from window resizes
-trap term_size 28
-
-term_size
