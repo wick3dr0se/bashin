@@ -1,44 +1,8 @@
 #!/bin/bash
 
-## ANSI
-declare -gA buffer cursor erase move color mode
-
-# vt100 escape sequences
-buffer=(
-  ['alt']='[?1049h'
-  ['main']='[?1049l'
-)
-
-cursor=(
-  ['hide']='[?25l'
-  ['show']='[?25h'
-  ['save']=7
-  ['restore']=8
-)
-
-erase=(
-  ['row']='[2K'
-  ['row-start']='[1K'
-  ['row-end']='[K'
-  ['screen']='[2J'
-  ['screen-start']='[1J'
-  ['screen-end']='[J'
-)
-
-move=(
-  ['up']=A
-  ['down']=B
-  ['right']=C
-  ['left']=D
-  ['down-start']=E
-  ['up-start']=F
-  ['col']=G
-  ['pos']=H
-  ['up-scroll']=S
-  ['down-scroll']=T
-)
-
 # select graphic rendition color codes
+declare -gA color mode
+
 color=(
   ['black']=0
   ['red']=1
@@ -60,35 +24,89 @@ mode=(
   ['hidden']=8
 )
 
-vt(){  # virtual terminal // control the terminal
-  local vt100 x y
+buffer_alt(){ printf '\e[?1049h'; }
 
-  for _; do
-    case $_ in
-      buffer:*) vt100+=("${buffer[${_#buffer:}]?}");;
-      cursor:*) vt100+=("${cursor[${_#cursor:}]?}");;
-      erase:*) vt100+=("${erase[${_#erase:}]?}");;
-      move:*)
-        [[ $_ =~ [0-9]$ ]]|| : "$_:1"
-        foo="${_#move:}"; : "${foo#*:}"
+buffer_main(){ printf '\e[?1049l'; }
 
-        [[ $_ =~ [0-9]+:[0-9]+ ]]&&{
-          x="${_%:*}" y="${_#*:}"; : "$y;${x}"
-        }
-        
-        vt100+=("[$_${move[${foo%%:*}]?}")
-      ;;
-      *)
-        printf 'Invalid argument!'
-        return 1
-      ;;
-    esac
-  done
+line_break(){ printf '\e[?7l]'; }
 
-  printf '\e%s' "${vt100[@]}"
+line_wrap(){ printf '\e[?7h'; }
+
+mouse_off(){ printf '\e[?1000l'; }
+
+mouse_on(){ printf '\e[?1000h'; }
+
+cursor_hide(){ printf '\e[?25l'; }
+
+cursor_show(){ printf '\e[?25h'; }
+
+cursor_save(){ printf '\e7'; }
+
+cursor_restore(){ printf '\e8'; }
+
+cursor_up(){  # accepts <N> or <arg> <N>
+  case $1 in
+    'start') printf '\e[%dF' "$2";;
+    *) printf '\e[%dA' "$1";;
+  esac
 }
 
-sgr(){ # select graphic rendition // style/color strings
+cursor_down(){ # accepts <N> or <arg> <N>
+  case $1 in
+    'start') printf '\e[%dE' "$2";;
+    *) printf '\e[%dB' "$1";;
+  esac
+}
+
+cursor_right(){ # accepts <N>
+  printf '\e[%dC' "$1"
+}
+
+cursor_left(){ # accepts <N>
+  printf '\e[%dD' "$1"
+}
+
+cursor_column(){ # accepts <N>
+  printf '\e[%dG' "$1"
+}
+
+cursor_row(){ # accepts <N>
+  local x
+  IFS='[;' read -p $'\e[6n' -d R -rs _ _ x _
+
+  printf '\e[%d;%dH' "$1" "$x"
+}
+
+cursor_position(){ # accepts <N> <N>
+  printf '\e[%d;%dH' "$2" "$1"
+}
+
+erase_row(){ # accepts <arg>
+  case $1 in
+    'start') printf '\e[1K';;
+    'end') printf '\e[K';;
+    *) printf '\e[2K';;
+  esac
+}
+
+erase_screen(){ # accepts <arg>
+  case $1 in
+    'buffer') printf '\e[3J]';;
+    'start') printf '\e[1J';;
+    'end') printf '\e[J';;
+    *) printf '\e[2J';;
+  esac
+}
+
+scroll_up(){ # accepts <N>
+  printf '\e[%dS'
+}
+
+scroll_down(){ # accepts <N>
+  printf '\e[%dT'
+}
+
+sgr_write(){ # select graphic rendition // style/color strings
   local sgr
 
   for _; do
@@ -101,6 +119,11 @@ sgr(){ # select graphic rendition // style/color strings
   done
 
   printf '%b' "${sgr[@]}"
+}
+
+sgr_writeline(){
+  sgr_write "$@"
+  printf '\n'
 }
 
 # wipe terminal screen
