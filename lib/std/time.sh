@@ -3,11 +3,8 @@
 shopt -s extglob
 
 clock(){
-  local start="$EPOCHSECONDS"
+  CLOCK_START="$EPOCHSECONDS"
   "$@"
-  local end="$EPOCHSECONDS"
 
-  ((CLOCK=end-start))
-
-  printf '%s\n' "$CLOCK"
+  ((CLOCK=EPOCHSECONDS-CLOCK_START))
 }
