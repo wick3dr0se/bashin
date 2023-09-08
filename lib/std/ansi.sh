@@ -66,7 +66,7 @@ cursor_left(){ # accepts <N>
   printf '\e[%dD' "$1"
 }
 
-cursor_column(){ # accepts <N>
+cursor_col(){ # accepts <N>
   printf '\e[%dG' "$1"
 }
 
@@ -77,7 +77,7 @@ cursor_row(){ # accepts <N>
   printf '\e[%d;%dH' "$1" "$x"
 }
 
-cursor_position(){ # accepts <N> <N>
+cursor_pos(){ # accepts <N> <N>
   printf '\e[%d;%dH' "$2" "$1"
 }
 
