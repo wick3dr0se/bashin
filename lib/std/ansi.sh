@@ -11,6 +11,8 @@ color=(
   ['blue']=4
   ['purple']=5
   ['cyan']=6
+  ['white']=7
+  ['default']=9
 )
 
 mode=(
