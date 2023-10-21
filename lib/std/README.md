@@ -2,12 +2,160 @@
 
 A library of ANSI escape sequences
 
-### SGR
-text colors and styles (accepts countless arguments)
+### Wipe Terminal
+wipe terminal clean, clearing screen, buffer & set cursor to row 0, column 0
 ```bash
-sgr <mode> fg:<color> bg:<color>
+wipe_term
+```
+---
+
+### Alternative Buffer
+switch the terminal to the alternative buffer
+```bash
+buffer_alt
+```
+---
+
+### Main Buffer
+switch the terminal to the main buffer
+```bash
+buffer_main
+```
+---
+
+### Line Break
+break lines at terminal width
+```bash
+line_break
+```
+---
+
+### Main Buffer
+wrap lines
+```bash
+line_wrap
+```
+---
+
+### Mouse Off
+turn off mouse input detection
+```bash
+mouse_off
+```
+---
+
+### Mouse On
+turn on mouse input detection
+```bash
+mouse_on
 ```
 
+### Cursor Hide
+hide the terminal cursor
+```bash
+cursor_hide
+```
+---
+
+### Cursor Show
+show the terminal cursor
+```bash
+cursor_show
+```
+---
+
+### Cursor Save
+save cursor position
+```bash
+cursor_save
+```
+---
+
+### Cursor Restore
+restore saved cursor poistion
+```bash
+cursor_restore
+```
+---
+
+### Cursor Up
+move cursor up N cells, optionally at the start
+```bash
+cursor_up [start] [N]
+```
+---
+
+### Cursor Down
+move cursor down N cells, optionally at the start
+```bash
+cursor_down [start] [N]
+```
+---
+
+### Cursor Right
+move cursor right N cells
+```bash
+cursor_right [N]
+```
+---
+
+### Cursor Left
+move cursor left N cells
+```bash
+cursor_left [N]
+```
+---
+
+### Cursor Column
+move cursor to column N
+```bash
+cursor_col <N>
+```
+---
+
+### Cursor Row
+move cursor to row N
+```bash
+cursor_row <N>
+```
+---
+
+### Erase Row
+erase terminal row, optionally from start to cursor or to end from cursor 
+```bash
+erase_row [start/end]
+```
+---
+
+### Erase Screen
+erase terminal screen, optionally from start to cursor, end to cursor or the entire buffer
+```bash
+erase_screen [start/end/buffer]
+```
+---
+
+### Scroll Up
+scroll the terminal up N rows
+```bash
+scroll_up [N]
+```
+---
+
+### Scroll Down
+scroll the terminal down N rows
+```bash
+scroll_down [N]
+```
+---
+
+### Select Graphic Rendition
+text colors and styles (accepts countless arguments)
+```bash
+sgr_write [bg:<red>] 'test' [mode:<bold>] [fg:<blue>] 'i am blue text'
+
+# append a newline
+sgr_writeline [bg:<red>] 'test' [mode:<bold>] [fg:<blue>] 'i am blue text'
+```
 ---
 
 ### SGR — Color Parameters
@@ -37,39 +185,11 @@ sgr <mode> fg:<color> bg:<color>
 
 ---
 
-### VT100
-terminal control (accepts countless arguments)
+### Colorize
+rainbow colorize some text
 ```bash
-vt '<erase>' '<position>'
+colorize 'text'
 ```
----
-
-### VT100 — Positional Parameters
-
-`pos` - move cursor to row N, col N or 0,0  
-`up` - move up # rows  
-`down` - move down # rows  
-`right` - move right # columns  
-`left` - move left # columns  
-`down:beg` - move down to beginning of row #  
-`up:beg` - move up to beginning of row #  
-`col` - move cursor to column #   
-`up:scroll` - move up 1 row & scroll  
-`save` - save cursor position  
-`restore` - restore cursor to the last save position
-
----
-
-### VT100 — Erase Parameters
-
-`?screen:end` - erase from cursor to end of screen  
-`?screen:beg` - erase from beg of screen to cursor  
-`?screen` - erase entire screen  
-`?screen:buffer` - erase entire screen buffer  
-`?row:end` - erase from cursor to end of row  
-`?row:beg` - erase start of row to cursor  
-`?row` - erase the entire row
-
 ---
 </details>
 
@@ -82,7 +202,6 @@ Times a commands execution
 ```bash
 clock <command>
 ```
-
 ---
 </details>
 
@@ -101,18 +220,16 @@ Example:
 echo "$LINE $COLUMN"
 ```
 > 53 1
-
 ---
 
 ### Terminal Dimensions
-Fetches terminal window cells (implicit)
+Fetches terminal window cells
 
 Example:
 ```bash
 echo "$LINES $COLUMNS"
 ```
 > 53 84
-
 ---
 
 ### Read Keyboard Input
@@ -126,7 +243,6 @@ Example:
 echo "$KEY"
 ```
 > [A
-
 ---
 </details>
 
@@ -141,7 +257,6 @@ Stores to the baked in $REGEX (variable)
 ```bash
 regex '<string>' '<pattern>'
 ```
-
 ---
 
 ### Trim
@@ -151,7 +266,6 @@ Stores to the baked in $TRIM (variable)
 ```bash
 trim '<string>' '<value>'
 ```
-
 ---
 
 ### Trim all
@@ -161,7 +275,6 @@ Stored to the baked in $TRIM (variable)
 ```bash
 trim_all '<string>' '<value>'
 ```
-
 ---
 
 ### Delimiter
@@ -171,7 +284,6 @@ Sets to the baked in $DELIM (array)
 ```bash
 delim '<string>' '<delimiter>'
 ```
-
 ---
 
 ### Random element
@@ -187,7 +299,6 @@ Example:
 echo "$RAND"
 ```
 > f
-
 ---
 
 ### Unique Elements
@@ -203,7 +314,6 @@ Example:
 echo "$UNIQUE"
 ```
 > a x
-
 ---
 
 ### Reverse String
@@ -221,7 +331,6 @@ Example:
 echo "$REVERSE"
 ```
 > gnirts
-
 ---
 
 ### Reverse Array
@@ -239,6 +348,5 @@ Example:
 echo "${REVERSE[@]}"
 ```
 > string2 string1
-
 ---
 </details>
