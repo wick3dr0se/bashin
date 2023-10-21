@@ -16,7 +16,21 @@ Many scripters resort to slow external commands glued together with pipes and su
 
 Bashin supports push, pop, cycling arrays and many more array/stack operations. Bashin handles ANSI escape sequences that make coloring, positioning and other terminal modifications much more simple (like building a TUI)
 
-BASH can *really* shine in string manipulation:
+```bash
+push 'a' 'b' 'c'
+
+echo "${STACK[@}"
+```
+
+> a b c
+
+```bash
+stack -r
+
+echo "${STACK[@]}"
+```
+
+> c b a
 
 ```bash
 arr=('a' 'b' 'c')
