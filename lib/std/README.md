@@ -209,15 +209,41 @@ clock <command>
 
 A library of TUI procedures
 
-### Terminal Cursor Position
-Fetches the current cursor position within the terminal
+### Echo Off
+turn off terminal echoing
 ```bash
-cur_pos
+echo_off
+```
+---
+
+### Echo On
+turn on terminal echoing
+```bash
+echo_on
+```
+
+### Terminal Dimensions
+fetches the terminal dimensions
+```bash
+get_term_size
 ```
 
 Example:
 ```bash
-echo "$LINE $COLUMN"
+echo "$ROWS $COLS"
+```
+> 123 188
+---
+
+### Terminal Cursor Position
+Fetches the current cursor position within the terminal
+```bash
+get_cursor_pos
+```
+
+Example:
+```bash
+echo "$ROW $COL"
 ```
 > 53 1
 ---
