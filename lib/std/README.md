@@ -120,6 +120,13 @@ cursor_row <N>
 ```
 ---
 
+### Cursor Position
+move cursor position to column N, row N
+```bash
+cursor_pos <N> <N>
+```
+---
+
 ### Erase Row
 erase terminal row, optionally from start to cursor or to end from cursor 
 ```bash
