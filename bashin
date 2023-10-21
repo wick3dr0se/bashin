@@ -10,6 +10,7 @@ unset path
 path="${BASH_SOURCE[0]%bashin}"
 
 BASHIN=1
+[[ -e /dev/null ]]&& NULL='/dev/null'
 
 # source libraries (scripts)
 import(){
