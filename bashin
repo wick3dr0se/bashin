@@ -6,24 +6,22 @@ set -a
 shopt -s expand_aliases
 
 BASHIN=1
+BASHIN_PATH="${BASH_SOURCE[0]%bashin}"
+
 [[ -e /dev/null ]]&& NULL='/dev/null'
 
 # source libraries (scripts)
 import(){
-  path="${BASH_SOURCE[0]%bashin}"
+  local lib proc
 
-  #unset lib proc
   for _; do
     [[ $_ =~ / ]]&&{ lib="${_%/*}" proc="${_#*/}"; }|| proc="$_"
-
-    . "${path:-./}"lib/"${lib-}"*/"${proc%.sh}.sh"
+    . "${BASHIN_PATH:-./}"lib/"${lib-}"*/"${proc%.sh}.sh"
   done
 }
 
 # source all libraries
-import_all(){
-  import std/* sys/*
-}
+import_all(){ import std/* sys/*; }
 
 # importing the core libs
 import core/{args,loops,stacks}
