@@ -1,5 +1,5 @@
 <div align="center">
-<h1>bashin</h1>
+<h1>:crystal_ball: bashin</h1>
 <p>A minimal BASH framework</p>
 
 <img src="https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white"></img>
