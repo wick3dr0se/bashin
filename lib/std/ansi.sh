@@ -1,31 +1,5 @@
 #!/bin/bash
 
-# select graphic rendition color codes
-declare -gA color mode
-
-color=(
-  ['black']=0
-  ['red']=1
-  ['green']=2
-  ['yellow']=3
-  ['blue']=4
-  ['purple']=5
-  ['cyan']=6
-  ['white']=7
-  ['default']=9
-)
-
-mode=(
-  ['bold']=1
-  ['dim']=2
-  ['italic']=3
-  ['underlline']=4
-  ['blink']=5
-  ['rapid-blink']=6
-  ['inverse']=7
-  ['hidden']=8
-)
-
 buffer_alt(){ printf '\e[?1049h'; }
 
 buffer_main(){ printf '\e[?1049l'; }
@@ -110,6 +84,27 @@ scroll_down(){ # accepts <N>
 
 sgr_write(){ # select graphic rendition // style/color strings
   local sgr
+  local -A color=(
+    ['black']=0
+    ['red']=1
+    ['green']=2
+    ['yellow']=3
+    ['blue']=4
+    ['purple']=5
+    ['cyan']=6
+    ['white']=7
+    ['default']=9
+  )
+  local -A mode=(
+    ['bold']=1
+    ['dim']=2
+    ['italic']=3
+    ['underlline']=4
+    ['blink']=5
+    ['rapid-blink']=6
+    ['inverse']=7
+    ['hidden']=8
+  )
 
   for _; do
     case $_ in
