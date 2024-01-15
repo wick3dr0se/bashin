@@ -30,7 +30,7 @@ import_all(){
 }
 
 # importing the core libs
-import core/{loops,stacks}
+import core/{args,loops,stacks}
 
 # defining more practical command names
 alias lc=line_count
