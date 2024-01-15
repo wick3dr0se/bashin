@@ -1,6 +1,18 @@
+<details open><summary><h1>:keyboard: Args</h1></summary>
+
+Functions to parse arguments
+
+### Get Args
+Get arguments/short/long options seperately, storing them to the $ARGS & $OPTS arrays respectively
+```bash
+get_args "$@"
+```
+---
+</details>
+
 <details open><summary><h1>:infinity: Loops</h1></summary>
 
-A library of very useful loop helper procedures
+A collection of very useful loop helper procedures
 
 ### Skip
 Skip N or 1 loop iterations. Iterations are stored to the $SKIP builtin
@@ -20,12 +32,12 @@ push <element>
 ```
 
 ### Pop
-Pop element(s) from stack, storing them to the $POPPED builtin
+Pop element(s) from stack, storing them to the $POPPED variable
 ```bash
 pop <element_index>
 ```
 
-*Executing `pop` without arguments will pop the first element from the stack`
+*Executing `pop` without arguments will pop the first element from the stack
 
 ### Peek
 Show element(s) in stack
