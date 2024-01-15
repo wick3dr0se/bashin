@@ -5,16 +5,14 @@
 set -a
 shopt -s expand_aliases
 
-unset path
-# set absolute directory
-path="${BASH_SOURCE[0]%bashin}"
-
 BASHIN=1
 [[ -e /dev/null ]]&& NULL='/dev/null'
 
 # source libraries (scripts)
 import(){
-  unset lib proc
+  path="${BASH_SOURCE[0]%bashin}"
+
+  #unset lib proc
   for _; do
     [[ $_ =~ / ]]&&{ lib="${_%/*}" proc="${_#*/}"; }|| proc="$_"
 
@@ -24,9 +22,7 @@ import(){
 
 # source all libraries
 import_all(){
-  for _ in "${path:-./}"lib/{sys,std}/*.sh; do
-    . "$_"
-  done
+  import std/* sys/*
 }
 
 # importing the core libs
