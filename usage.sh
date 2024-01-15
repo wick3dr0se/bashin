@@ -11,6 +11,12 @@ import std/{ansi,time,tui,strings}
 
 wipe_term # just to clear the screen
 
+# < core/args > #
+# get arguments seperated from short/long options
+get_args "$@"
+echo "${ARGS[@]}"
+echo "${OPTS[@]}"
+
 # < core/loops > #
 for i in {1..3}; do
   skip 2&& i+=' Skipped 2 iterations'
@@ -91,10 +97,6 @@ for((;;)){
     \[*) printf "$KEY ";;
   esac
 }
-
-# make boundries infinite by sending cursor to opposite end of screen
-#infinite_boundries Y X # works by nameref settings Y & X var respectively
-# -------------------------------------------------------
 
 # < sys/bashist > #
 # -------------------------------------------------------
