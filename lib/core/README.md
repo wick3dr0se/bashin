@@ -2,10 +2,16 @@
 
 Functions to parse arguments
 
-### Get Args
+### Get Argument
 Get arguments/short/long options seperately, storing them to the $ARGS & $OPTS arrays respectively
 ```bash
 get_args "$@"
+```
+
+### Has Option
+Check if parameters contain option(s); Returns true/false depending on if one or more of the supplied options was found
+```bash
+has_opt '-a' '--b' '-c d'
 ```
 ---
 </details>
