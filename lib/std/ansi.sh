@@ -67,7 +67,7 @@ erase_row(){ # accepts <arg>
 
 erase_screen(){ # accepts <arg>
   case $1 in
-    'buffer') printf '\e[3J]';;
+    'buffer') printf '\e[3J';;
     'start') printf '\e[1J';;
     'end') printf '\e[J';;
     *) printf '\e[2J';;
