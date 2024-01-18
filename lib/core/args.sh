@@ -3,7 +3,9 @@
 # get arguments and short/long options
 get_opts(){
   for _; do
-    if [[ $_ =~ ^-(-)? ]]; then
+    if [[ $_ == '--' ]]; then
+      endOfOpts=1
+    elif (( !endOfOpts ))&& [[ $_ =~ ^-(-)? ]]; then
       OPTS[$i]="$_"
       ((i++))
       isOpt=1
